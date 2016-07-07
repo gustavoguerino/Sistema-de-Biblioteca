@@ -1,6 +1,5 @@
 package biblioteca.acervo;
 
-
 public class ItemAcervo implements InterfaceItemAcervo {
 	private double custo;
 	private String dataAlguel;
@@ -37,14 +36,17 @@ public class ItemAcervo implements InterfaceItemAcervo {
 
 	//Métodos do acervo
 	public ItemAcervo(){}
+	
 	public void alugar(){};
+	
 	public double devolver(){
+		//só pro programa parar de reclamar, depois atualiza
 		return 13212;
 	}
 	public boolean estaPago(){
 		return pago;
 	};
+	
 	public void reservar(int codigoUsuario){};
-
 
 }
