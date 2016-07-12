@@ -3,20 +3,69 @@ package biblioteca.usuario;
 import biblioteca.acervo.ItemAcervo;
 
 public class Usuario implements InterfaceUsuario{
+    //==============Gustavo=================================================================================
+    //Para fazer referencia ao item escolhido mudei a interface da fun escolherItemAcervo, nao fazia sentido 
+    //Se quiser mudar fique avontade..
+    //======================================================================================================
+    private int codUsuario;
+    private String nome, endereco, cpf;
+    private ItemAcervo alugou;
+    public int getCodUsuario() {
+        return codUsuario;
+    }
 
-	private int codUsuario;
-	private String nome, endereco, cpf;
-	public Usuario(){
+    public void setCodUsuario(int codUsuario) {
+        this.codUsuario = codUsuario;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+        
+    public Usuario(){
 		
-	}
-	public void pagar() {
-		// TODO Auto-generated method stub
-		
-	}
-	public ItemAcervo escolherItemAcervo() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    }
+    public void pagar() {
+	//==========Gustavo=============================
+        // Verifica se o usuario alugou algo, e se alugou setPago para true no objeto.
+        // 
+        //=============================================
+	if((!alugou.estaPago()) && (alugou != null)){
+            alugou.setPago(true);
+        }
+    }
+    public boolean devendo(){
+        if((alugou != null)){
+            return alugou.estaPago();
+        }
+        else{
+            return false;
+        }
+    }
+    public void escolherItemAcervo(ItemAcervo itemEscolhido){
+           itemEscolhido.alugar(this);
+           alugou = itemEscolhido;
+    }
 	
 
 }
