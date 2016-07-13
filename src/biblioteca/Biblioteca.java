@@ -8,7 +8,7 @@ package biblioteca;
  *
  * @author gustavoguerino
  */
-public class Biblioteca {
+public class Biblioteca implements InterfaceBiblioteca {
     private String nomeBiblioteca = "Biblioteca IFRN";
     public Biblioteca() {
         
@@ -19,5 +19,9 @@ public class Biblioteca {
 
     public void setNomeBiblioteca(String nomeBiblioteca) {
         this.nomeBiblioteca = nomeBiblioteca;
+    }
+
+    public boolean logarUsuario(String usuario, String senha) { //Verificar usuario e senha, retornar true se valido e false se invalido
+        return false; //Se retornar True logar usuario!
     }
 }
