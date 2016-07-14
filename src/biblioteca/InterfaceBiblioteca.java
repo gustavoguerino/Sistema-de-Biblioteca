@@ -10,5 +10,6 @@ package biblioteca;
  * @author gustavoguerino
  */
 public interface InterfaceBiblioteca {
-    public boolean logarUsuario(String usuario, String senha);
+    boolean logarUsuario(String usuario, String senha);
+    void cadastrarUsuario();
 } 
