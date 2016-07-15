@@ -48,7 +48,7 @@ public class JFrameInicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
-        setBackground(new java.awt.Color(51, 51, 51));
+        setBackground(new java.awt.Color(204, 204, 204));
         setName("Inicio"); // NOI18N
         setResizable(false);
 
@@ -150,6 +150,9 @@ public class JFrameInicio extends javax.swing.JFrame {
         }
         else{
             if(biblio.logarUsuario(CampoUsuario.getText(), CampoSenha.getText())){
+                JFrameCadastro cad = new JFrameCadastro();
+                cad.setVisible(true);
+                cad.setTitle("Cadastro de Usuários");
                 dispose();             //Destruir o jframe
             }
             else{

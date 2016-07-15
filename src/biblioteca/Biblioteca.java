@@ -32,37 +32,31 @@ public class Biblioteca implements InterfaceBiblioteca {
     }
 
     //Método para cadastrar o usuário
-    public void cadastrarUsuario(){
-    	
-    	int codUser = input.nextInt();
-    	users[contuser].setCodUsuario(codUser);
-    	
-    	String nomeUser = input.next();
-    	users[contuser].setNome(nomeUser);
-    	
-    	String EndUser = input.next();
-    	users[contuser].setEndereco(EndUser);
-    	
-    	String cpfUser = input.next();
-    	users[contuser].setCpf(cpfUser);
-    	
-    	String loginUser = input.next();
-    	users[contuser].setUsuario(loginUser);
-    	
-    	String senhaUser = input.next();
-    	users[contuser].setSenha(senhaUser);
-    	
-    	contuser+=1;
+    public void cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser){
+        for(int i = 0; i < users.length; i++){
+            if(users[i] == null){
+                users[i] = new Usuario();
+                users[i].setCodUsuario(i);
+                users[i].setNome(nomeUser);
+                users[i].setEndereco(endUser);
+                users[i].setCpf(cpfUser);
+                users[i].setUsuario(loginUser);
+                users[i].setSenha(senhaUser);
+                break;
+            }
+        }
     }
 
     public boolean logarUsuario(String usuario, String senha) {
     	 //verificador se o login do usuário está válido
     	boolean confirm = false;
     	//Verificar usuario e senha, retornar true se valido e false se invalido
-    	for(int i = 0; i < contuser; i++){
-    		if((usuario==users[i].getUsuario()) && (senha==users[i].getSenha())){
+    	for(int i = 0; i < users.length; i++){
+            if(users[i] != null){
+                if((usuario.equals(users[i].getUsuario())) && (senha.equals(users[i].getSenha()))){
     			confirm = true;
     		}	
+            }
     	} 
     	return confirm;
     }
