@@ -150,10 +150,8 @@ public class JFrameInicio extends javax.swing.JFrame {
         }
         else{
             if(biblio.logarUsuario(CampoUsuario.getText(), CampoSenha.getText())){
-                JFrameCadastro cad = new JFrameCadastro();
-                cad.setVisible(true);
-                cad.setTitle("Cadastro de Usuários");
-                dispose();             //Destruir o jframe
+                SistemaBiblioteca.chamarCadastro();
+                dispose();
             }
             else{
                 LabelAvisos.setText("Senha ou Usuario incorreto!"); //Caso logarUsuario retorne false exibir isso

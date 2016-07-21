@@ -4,15 +4,19 @@ import java.util.Scanner;
 import biblioteca.*;
 
     public class SistemaBiblioteca {
-
+        static Biblioteca biblio; 
+        static JFrameInicio inicio;
+        static JFrameCadastro cadastro;
 	public static void main(String[] args) {
-            Biblioteca biblio = new Biblioteca();   
-            JFrameInicio inicio = new JFrameInicio(biblio);
+            biblio = new Biblioteca(); 
+            inicio = new JFrameInicio(biblio);
             inicio.setTitle("Tela Inicial");
             inicio.setVisible(true);
-            biblio.cadastrarUsuario("Teste", "Rua sem nome", "343.482.278.02", "teste", "gustavo");
+            biblio.cadastrarUsuario("Teste", "Rua sem nome", "34348227802", "teste", "gustavo");
         }
-        public void chamarCadastro(){
-            
+        public static void chamarCadastro(){
+            cadastro = new JFrameCadastro(biblio);   
+            cadastro.setTitle("Cadastro de Usuários");
+            cadastro.setVisible(true);
         }
     }

@@ -37,8 +37,15 @@ public class Biblioteca implements InterfaceBiblioteca {
 	}
 
 	//M√©todo para cadastrar de usu√°rio
-	public void cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser){
-		for(int i = 0; i < users.length; i++){
+	public boolean cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser){
+                for(int i = 0; i < users.length; i++){
+                    if(users[i] != null){
+                        if(users[i].getUsuario().equals(loginUser)){
+                            return false;
+                        }
+                    }
+                }
+                for(int i = 0; i < users.length; i++){
 			if(users[i] == null){
 				users[i] = new Usuario();
 				users[i].setCodUsuario(i);
@@ -47,12 +54,13 @@ public class Biblioteca implements InterfaceBiblioteca {
 				users[i].setCpf(cpfUser);
 				users[i].setUsuario(loginUser);
 				users[i].setSenha(senhaUser);
-				break;
+                                return true;
 			}
 		}
+                return false;
 	}
 
-	//MÈtodo para o cadastro de Livro
+	//MÔøΩtodo para o cadastro de Livro
 	public void cadastrarLivro(String newTitulo, String newAutor, String newIsbn, int newEdicao, int newQuantidade){
 		for(int i = 0; i < livros.length; i++){
 			if(livros[i] == null){
@@ -65,7 +73,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 	}
 
-	//MÈtodo para o cadastro de Apostila
+	//MÔøΩtodo para o cadastro de Apostila
 	public void cadastrarApostila(String newTitulo, String newAutor, int newQuantidade){
 		for(int i = 0; i < apostilas.length; i++){
 			if(apostilas[i] == null){
@@ -78,7 +86,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 	}
 
 
-	//MÈtodo para cadastro de Textos
+	//MÔøΩtodo para cadastro de Textos
 	public void cadastrarTexto(String newAutor){
 		for(int i = 0; i < textos.length; i++){
 			if(textos[i] == null){

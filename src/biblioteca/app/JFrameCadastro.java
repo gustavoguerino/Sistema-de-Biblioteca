@@ -5,6 +5,7 @@
  */
 package biblioteca.app;
 
+import biblioteca.Biblioteca;
 import java.awt.Color;
 
 /**
@@ -16,7 +17,9 @@ public class JFrameCadastro extends javax.swing.JFrame {
     /**
      * Creates new form JFrameCadastro
      */
-    public JFrameCadastro() {
+    Biblioteca bibliot;
+    public JFrameCadastro(Biblioteca biblioteca) {
+        bibliot = biblioteca;
         initComponents();
     }
 
@@ -34,11 +37,11 @@ public class JFrameCadastro extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        LabelNome = new javax.swing.JLabel();
+        LabelEnd = new javax.swing.JLabel();
+        LabelCpf = new javax.swing.JLabel();
+        LabelLogin = new javax.swing.JLabel();
+        LabelSenha = new javax.swing.JLabel();
         CampoNome = new javax.swing.JTextField();
         CampoEnd = new javax.swing.JTextField();
         CampoCPF = new javax.swing.JTextField();
@@ -47,7 +50,8 @@ public class JFrameCadastro extends javax.swing.JFrame {
         CampoSenha = new javax.swing.JPasswordField();
         CampoConfSenha = new javax.swing.JPasswordField();
         BotãoCadastro = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        LabelConfSenha = new javax.swing.JLabel();
+        LabelAvisos = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Dyuthi", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -61,7 +65,6 @@ public class JFrameCadastro extends javax.swing.JFrame {
         jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(450, 550));
         setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Dyuthi", 0, 48)); // NOI18N
@@ -69,20 +72,20 @@ public class JFrameCadastro extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("SGB");
 
-        jLabel3.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
-        jLabel3.setText("Nome completo");
+        LabelNome.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
+        LabelNome.setText("Nome completo");
 
-        jLabel4.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
-        jLabel4.setText("Endereço");
+        LabelEnd.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
+        LabelEnd.setText("Endereço");
 
-        jLabel5.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
-        jLabel5.setText("CPF (Somente Numeros)");
+        LabelCpf.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
+        LabelCpf.setText("CPF (Somente Numeros)");
 
-        jLabel6.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
-        jLabel6.setText("Login");
+        LabelLogin.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
+        LabelLogin.setText("Login");
 
-        jLabel7.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
-        jLabel7.setText("Senha");
+        LabelSenha.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
+        LabelSenha.setText("Senha");
 
         CampoNome.setBackground(new java.awt.Color(102, 102, 102));
         CampoNome.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,8 +132,8 @@ public class JFrameCadastro extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
-        jLabel8.setText("Confirme sua senha");
+        LabelConfSenha.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
+        LabelConfSenha.setText("Confirme sua senha");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -142,27 +145,21 @@ public class JFrameCadastro extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(CampoNome)
-                            .addComponent(CampoEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                            .addComponent(CampoEnd, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                             .addComponent(jSeparator1)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(CampoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(CampoConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabelSenha)
+                                    .addComponent(CampoConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(CampoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
+                                    .addComponent(LabelNome)
+                                    .addComponent(LabelEnd)
+                                    .addComponent(LabelCpf)
                                     .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(LabelLogin)
+                                    .addComponent(LabelConfSenha))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -171,6 +168,10 @@ public class JFrameCadastro extends javax.swing.JFrame {
                 .addGap(0, 164, Short.MAX_VALUE)
                 .addComponent(BotãoCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(160, 160, 160))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(198, 198, 198)
+                .addComponent(LabelAvisos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,32 +179,34 @@ public class JFrameCadastro extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jLabel3)
+                .addComponent(LabelNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
+                .addComponent(LabelEnd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
+                .addComponent(LabelCpf)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LabelLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel7)
+                .addComponent(LabelSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addComponent(LabelConfSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addComponent(LabelAvisos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotãoCadastro)
                 .addGap(17, 17, 17))
         );
@@ -212,13 +215,6 @@ public class JFrameCadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void CampoNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoNomeActionPerformed
-       if(CampoNome.getText().equals("ABC"))
-       {
-           CampoNome.setBackground(Color.yellow);
-       }
-       else{
-           CampoNome.setBackground(Color.white);
-       }
                
     }//GEN-LAST:event_CampoNomeActionPerformed
 
@@ -235,43 +231,32 @@ public class JFrameCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_CampoLoginActionPerformed
 
     private void BotãoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotãoCadastroActionPerformed
-        // TODO add your handling code here:
+       if(CampoNome.getText().length() < 10){
+           LabelAvisos.setText("Nome deve possuir 10+ caracteres!");
+       }
+       else if(CampoEnd.getText().length() < 10){
+           LabelAvisos.setText("Endereço deve possuir 10+ caracteres!");
+       }
+       else if(CampoCPF.getText().length() != 11){
+           LabelAvisos.setText("CPG deve possuir exatamente 11 caracteres!");
+       }
+       else if(CampoLogin.getText().length() < 3){
+           LabelAvisos.setText("Login deve possuir 3+ caracteres!");
+       }
+       else if(CampoSenha.getText().length() < 6){
+           LabelAvisos.setText("Senha deve possuir 6+ caracteres!");
+       }
+       else{
+           if(!bibliot.cadastrarUsuario(CampoNome.getText(), CampoEnd.getText(), 
+                   CampoCPF.getText(), CampoLogin.getText(), CampoSenha.getText())){
+               LabelAvisos.setText("Já existe um usuario cadastrado com o mesmo login!");
+           }
+           else{
+               dispose();
+           }
+       }
     }//GEN-LAST:event_BotãoCadastroActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFrameCadastro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JFrameCadastro().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotãoCadastro;
@@ -281,14 +266,15 @@ public class JFrameCadastro extends javax.swing.JFrame {
     private javax.swing.JTextField CampoLogin;
     private javax.swing.JTextField CampoNome;
     private javax.swing.JPasswordField CampoSenha;
+    private javax.swing.JLabel LabelAvisos;
+    private javax.swing.JLabel LabelConfSenha;
+    private javax.swing.JLabel LabelCpf;
+    private javax.swing.JLabel LabelEnd;
+    private javax.swing.JLabel LabelLogin;
+    private javax.swing.JLabel LabelNome;
+    private javax.swing.JLabel LabelSenha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JSeparator jSeparator1;
