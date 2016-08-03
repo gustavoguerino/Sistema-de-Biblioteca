@@ -81,6 +81,7 @@
                                   <Component id="CampoCPF" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                                   <Component id="LabelLogin" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="LabelConfSenha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="Lavisos" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -98,7 +99,7 @@
               <Component id="BotãoCadastro" min="-2" pref="126" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="198" max="-2" attributes="0"/>
               <Component id="LabelAvisos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
@@ -110,7 +111,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" pref="38" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Lavisos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
               <Component id="LabelNome" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="CampoNome" min="-2" max="-2" attributes="0"/>
@@ -136,7 +139,7 @@
               <Component id="LabelConfSenha" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="CampoConfSenha" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace pref="38" max="32767" attributes="0"/>
               <Component id="LabelAvisos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="BotãoCadastro" min="-2" max="-2" attributes="0"/>
@@ -289,6 +292,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="LabelAvisos">
+    </Component>
+    <Component class="javax.swing.JLabel" name="Lavisos">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="cc" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

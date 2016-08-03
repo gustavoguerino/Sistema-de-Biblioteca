@@ -52,6 +52,7 @@ public class JFrameCadastro extends javax.swing.JFrame {
         BotãoCadastro = new javax.swing.JButton();
         LabelConfSenha = new javax.swing.JLabel();
         LabelAvisos = new javax.swing.JLabel();
+        Lavisos = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Dyuthi", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -135,6 +136,8 @@ public class JFrameCadastro extends javax.swing.JFrame {
         LabelConfSenha.setFont(new java.awt.Font("DejaVu Sans Condensed", 1, 14)); // NOI18N
         LabelConfSenha.setText("Confirme sua senha");
 
+        Lavisos.setForeground(new java.awt.Color(204, 0, 0));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +161,8 @@ public class JFrameCadastro extends javax.swing.JFrame {
                                     .addComponent(LabelCpf)
                                     .addComponent(CampoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(LabelLogin)
-                                    .addComponent(LabelConfSenha))
+                                    .addComponent(LabelConfSenha)
+                                    .addComponent(Lavisos))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -178,7 +182,9 @@ public class JFrameCadastro extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lavisos)
+                .addGap(10, 10, 10)
                 .addComponent(LabelNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,7 +210,7 @@ public class JFrameCadastro extends javax.swing.JFrame {
                 .addComponent(LabelConfSenha)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CampoConfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(LabelAvisos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BotãoCadastro)
@@ -232,26 +238,31 @@ public class JFrameCadastro extends javax.swing.JFrame {
 
     private void BotãoCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotãoCadastroActionPerformed
        if(CampoNome.getText().length() < 10){
-           LabelAvisos.setText("Nome deve possuir 10+ caracteres!");
+           Lavisos.setText("Nome deve possuir 10+ caracteres!");
        }
        else if(CampoEnd.getText().length() < 10){
-           LabelAvisos.setText("Endereço deve possuir 10+ caracteres!");
+           Lavisos.setText("Endereço deve possuir 10+ caracteres!");
        }
        else if(CampoCPF.getText().length() != 11){
-           LabelAvisos.setText("CPG deve possuir exatamente 11 caracteres!");
+           Lavisos.setText("CPF deve possuir exatamente 11 caracteres!");
        }
        else if(CampoLogin.getText().length() < 3){
-           LabelAvisos.setText("Login deve possuir 3+ caracteres!");
+           Lavisos.setText("Login deve possuir 3+ caracteres!");
        }
        else if(CampoSenha.getText().length() < 6){
-           LabelAvisos.setText("Senha deve possuir 6+ caracteres!");
+           Lavisos.setText("Senha deve possuir 6+ caracteres!");
        }
        else{
-           if(!bibliot.cadastrarUsuario(CampoNome.getText(), CampoEnd.getText(), 
+           if(!CampoSenha.getText().equals(CampoConfSenha.getText())){
+               Lavisos.setText("Confirmação de senha incorreta!");
+               System.out.println(CampoSenha.getText());
+           }
+           else if(!bibliot.cadastrarUsuario(CampoNome.getText(), CampoEnd.getText(), 
                    CampoCPF.getText(), CampoLogin.getText(), CampoSenha.getText())){
-               LabelAvisos.setText("Já existe um usuario cadastrado com o mesmo login!");
+               Lavisos.setText("Já existe um usuario cadastrado com o mesmo login!");
            }
            else{
+               SistemaBiblioteca.teste();
                dispose();
            }
        }
@@ -273,6 +284,7 @@ public class JFrameCadastro extends javax.swing.JFrame {
     private javax.swing.JLabel LabelLogin;
     private javax.swing.JLabel LabelNome;
     private javax.swing.JLabel LabelSenha;
+    private javax.swing.JLabel Lavisos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;

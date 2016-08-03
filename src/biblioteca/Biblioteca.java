@@ -35,7 +35,10 @@ public class Biblioteca implements InterfaceBiblioteca {
 	public void setNomeBiblioteca(String nomeBiblioteca) {
 		this.nomeBiblioteca = nomeBiblioteca;
 	}
-
+        public Usuario[] getUsuarios(){
+            return users.clone();
+        }
+       
 	//Método para cadastrar de usuário
 	public boolean cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser){
                 for(int i = 0; i < users.length; i++){
