@@ -105,17 +105,14 @@ public class Biblioteca implements InterfaceBiblioteca {
 
 
 	public boolean logarUsuario(String usuario, String senha) {
-		//verificador se o login do usuário está válido
-		//boolean confirm = false;
-		//Verificar usuario e senha, retornar true se valido e false se invalido
-		//for(int i = 0; i < users.length; i++){
-			//if(users[i] != null){
-				//if((usuario.equals(users[i].getUsuario())) && (senha.equals(users[i].getSenha()))){
-					//confirm = true;
-				//}	
-			//}
-		//} 
-		return true;
+		boolean confirm = false;
+		for(int i = 0; i<users.size(); i++){
+			if(usuario.equals(users.get(i).getUsuario()) && (senha.equals(users.get(i).getSenha()))){
+				confirm = true;
+			}
+			
+		}
+		return confirm;
 	}
 
 }
