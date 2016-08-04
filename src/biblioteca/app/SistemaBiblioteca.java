@@ -5,25 +5,43 @@ import biblioteca.*;
 
     public class SistemaBiblioteca {
         static Biblioteca biblio; 
-        static JFrameInicio inicio;
-        static JFrameCadastro cadastro;
-        static JFramePrincipal principal;
+        private static boolean pararloop;
+        private static int menumsg;
 	public static void main(String[] args) {
             biblio = new Biblioteca(); 
-           // inicio = new JFrameInicio(biblio);
-           // inicio.setTitle("Tela Inicial");
-          //  inicio.setVisible(true);
-          //  biblio.cadastrarUsuario("Teste", "Rua sem nome", "34348227802", "teste", "gustavo");
-          teste();
+            pararloop = false;
+            //Loop Principal:
+            pularlinhas(10);
+            while (!pararloop) {
+                menumsg = 1;
+                mensagensmenu();
+            }
         }
-        public static void chamarCadastro(){
-            cadastro = new JFrameCadastro(biblio);   
-            cadastro.setTitle("Cadastro de Usuários");
-            cadastro.setVisible(true);
+        private static void titulo(){
+            switch (menumsg) {
+                case 1:
+                case 2:
+                    System.out.println("SGB  -  Entrada\n");
+                    break;
+
+            }
         }
-        public static void teste(){
-            principal = new JFramePrincipal(biblio);   
-            principal.setTitle("SGB - 0.00000000001A beta");
-            principal.setVisible(true);
+        private static void mensagensmenu(){
+            titulo();
+            switch (menumsg) {
+                case 1:
+                    System.out.println("Login: ");
+                    break;
+                case 2:
+                    System.out.println("Senha: ");
+                    break;
+
+            }
+                    
+        }
+        private static void pularlinhas(int linhas){
+            for (int x = 0; x < linhas; x++) {
+                System.out.println(" ");
+            }
         }
     }
