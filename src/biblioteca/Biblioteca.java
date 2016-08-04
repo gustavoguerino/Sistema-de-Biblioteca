@@ -107,7 +107,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 	public boolean logarUsuario(String usuario, String senha) {
 		boolean confirm = false;
 		for(int i = 0; i<users.size(); i++){
-			if(usuario.equals(users.get(i).getUsuario()) && (senha.equals(users.get(i).getSenha()))){
+			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
 				confirm = true;
 			}
 			
