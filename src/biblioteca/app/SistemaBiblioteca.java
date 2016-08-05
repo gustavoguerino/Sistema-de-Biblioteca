@@ -47,15 +47,15 @@ import biblioteca.*;
                     pularlinhas(100);
                     System.out.println("SGB  -  Menu Principal"
                             + "\n\nListagens:"
-                            + "\n1 - Livros"
-                            + "\n2 - Apostilas"
-                            + "\n3 - Textos"
-                            + "\n4 - Usuarios"
+                            + "\n1 - Livros"//
+                            + "\n2 - Apostilas"//
+                            + "\n3 - Textos"//
+                            + "\n4 - Usuarios"//
                             + "\n\nCadastros:"
-                            + "\n5 - Livros"
-                            + "\n6 - Apostilas"
-                            + "\n7 - Textos"
-                            + "\n8 - Usuarios"
+                            + "\n5 - Livros"//
+                            + "\n6 - Apostilas"//
+                            + "\n7 - Textos"//
+                            + "\n8 - Usuarios"//
                             + "\n\nFunções Basicas:"
                             + "\n9 - Alugar Item"
                             + "\n10 - Pagar Emprestimo"
@@ -81,7 +81,7 @@ import biblioteca.*;
                             //Listar os usuarios
                             break;
                         case "5":
-                            cadastrarItem(1);
+                            cadastrar(1);
                             pularlinhas(100);
                             System.out.println("\n\nProcesso de cadastro concluido.");
                             break;
@@ -93,11 +93,11 @@ import biblioteca.*;
                                
             }
         }
-        private static boolean cadastrarItem(int opcao){
+        private static boolean cadastrar(int opcao){
             pularlinhas(100);
+            boolean concluido = false;
             System.out.println("Digite as informações solicitadas para cadastrar o item:");
             if(opcao == 1){
-                boolean concluido = false;
                 while (concluido == false){
                     //biblio.cadastrarLivro(autor, autor, isbn, edicao);
                     System.out.println("\nQual o titulo:");
@@ -110,25 +110,53 @@ import biblioteca.*;
                     strread4 = read.nextLine();
                     System.out.println("\n\nConfira os dados acima!\nCaso esteja incorreto, digite 0 para tentar novamente!");
                     confirmacao = read.nextLine();
-                    if(confirmacao != "0")
-                    {
-                        try {
+                    try {
+                        if(confirmacao != "0"){
                             biblio.cadastrarLivro(strread, strread2, strread3,  Integer.parseInt(strread4));
                             concluido = true;
-                        } catch (Exception e) {
-                            
                         }
-                    }
-                    else
-                    {
+                        else{
+                            pularlinhas(100);
+                        }
+                    } catch (NumberFormatException nfe) {
                         pularlinhas(100);
+                        System.out.println("\nSomente numeros são aceitos no campo edição, tente novamente!\n");
                     }
-
                 }
             }else if(opcao == 2){
-                
+                while (concluido == false){
+                    //biblio.cadastrarApostila(titulo, autor);
+                    System.out.println("\nQual o titulo:");
+                    strread = read.nextLine();
+                    System.out.println("\nQuem escreveu:");
+                    strread2 = read.nextLine();
+                    System.out.println("\n\nConfira os dados acima!\nCaso esteja incorreto, digite 0 para tentar novamente!");
+                    confirmacao = read.nextLine();
+                    if(confirmacao != "0"){
+                        biblio.cadastrarApostila(strread, strread2);
+                        concluido = true;
+                    }
+                    else{
+                        pularlinhas(100);
+                    }
+                }
             }else if(opcao == 3){
-                
+                while (concluido == false){
+                    //biblio.cadastrarTexto(strread, strread);
+                    System.out.println("\nQual o titulo:");
+                    strread = read.nextLine();
+                    System.out.println("\nQuem escreveu:");
+                    strread2 = read.nextLine();
+                    System.out.println("\n\nConfira os dados acima!\nCaso esteja incorreto, digite 0 para tentar novamente!");
+                    confirmacao = read.nextLine();
+                    if(confirmacao != "0"){
+                        biblio.cadastrarTexto(strread, strread2);
+                        concluido = true;
+                    }
+                    else{
+                        pularlinhas(100);
+                    }
+                }                
             }
             return true;
         }
