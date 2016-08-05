@@ -54,7 +54,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 	}
 
 	//Metodo para o cadastro de Livro
-	public void cadastrarLivro(String newTitulo, String newAutor, String newIsbn, int newEdicao, int newQuantidade){
+	public void cadastrarLivro(String newTitulo, String newAutor, String newIsbn, int newEdicao){
 
 		Livro livro = new Livro();
 		livro.setTitulo(newTitulo);
@@ -66,31 +66,31 @@ public class Biblioteca implements InterfaceBiblioteca {
 	}
 
 	//Metodo para o cadastro de Apostila
-	public void cadastrarApostila(String newTitulo, String newAutor, int newQuantidade){
+	public void cadastrarApostila(String newTitulo, String newAutor){
 
 		Apostila apostila = new Apostila();
 		apostila.setTitulo(newTitulo);
 		apostila.setAutor(newAutor);
-		apostila.setQuantidade(newQuantidade);
 		apostilas.add(apostila);
 
 	}
 
 
 	//Metodo para cadastro de Textos
-	public void cadastrarTexto(String newAutor){
+	public void cadastrarTexto(String newTitulo, String newAutor){
 
 		Texto texto = new Texto();
 		texto.setAutor(newAutor);
+                texto.setTitulo(newTitulo);
 		textos.add(texto);
 	}
 
 
-	//Aqui o método procura o titulo ou o autor (se for texto) e remove o indice
+	//Aqui o mï¿½todo procura o titulo ou o autor (se for texto) e remove o indice
 	//em que o objeto estiver..
 	
 	//O loop exclui o primeiro elemento com o titulo ou o autor procurados, o break
-	//serve para de executar o loop, para que não se remova outros livros com titulos iguais.
+	//serve para de executar o loop, para que nï¿½o se remova outros livros com titulos iguais.
 	//Removendo livros
 	public void removerLivro(String tituloremov){
 		for(int i = 0; i < livros.size(); i++){
@@ -127,7 +127,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		for(int i = 0; i<users.size(); i++){
 			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
 				confirm = true;
-				//adicionei um break aqui pra ele parar de procurar o usuario caso já tenha achado.
+				//adicionei um break aqui pra ele parar de procurar o usuario caso jï¿½ tenha achado.
 				break;
 			}
 

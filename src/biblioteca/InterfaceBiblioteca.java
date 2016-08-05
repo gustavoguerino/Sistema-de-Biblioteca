@@ -12,9 +12,9 @@ package biblioteca;
 public interface InterfaceBiblioteca {
     boolean logarUsuario(String usuario, String senha);
     void cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser);
-    void cadastrarLivro(String newTitulo, String newAutor, String newIsbm, int newEdicao, int newQuantidade);
-    void cadastrarApostila(String newTitulo, String newAutor, int newQuantidade);
-    void cadastrarTexto(String newAutor);
+    void cadastrarLivro(String newTitulo, String newAutor, String newIsbm, int newEdicao);
+    void cadastrarApostila(String newTitulo, String newAutor);
+    void cadastrarTexto(String newTitulo, String newAutor);
     void removerLivro(String tituloremov);
 	void removerApostila(String tituloremov);
 	void removerTexto(String tituloremov);
