@@ -37,9 +37,6 @@ public class Biblioteca implements InterfaceBiblioteca {
 		this.nomeBiblioteca = nomeBiblioteca;
 	}
 	//Pra que serve isso????????
-	public Usuario[] getUsuarios(){
-		return users.clone();
-	}
 
 	//Metodo para cadastrar de usuario
 	public void cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser){

@@ -7,14 +7,36 @@ import biblioteca.*;
         static Biblioteca biblio; 
         private static boolean pararloop;
         private static int menumsg;
+        private static String strread, strread2;
+        private static Scanner read = new Scanner(System.in); 
+                
+                
 	public static void main(String[] args) {
             biblio = new Biblioteca(); 
             pararloop = false;
+            menumsg = 1;
+            biblio.cadastrarUsuario("Gustavo Guerino", "Rua Logo Ali", "34348227802", "teste", "123456");
             //Loop Principal:
-            pularlinhas(10);
+           
             while (!pararloop) {
-                menumsg = 1;
-                mensagensmenu();
+                pularlinhas(20);
+                while(menumsg != 1 || menumsg != 2){
+                    mensagensmenu();
+                    strread = read.next();  
+                    menumsg = 2;
+                    pularlinhas(20);
+                    mensagensmenu();
+                    strread2 = read.next();
+                    if(biblio.logarUsuario(strread, strread2))   
+                        menumsg = 3;
+                    else{
+                        menumsg = 1;  
+                        pularlinhas(20);
+                        System.out.println("Senha incorreta!");
+                    }
+                             
+                }
+                               
             }
         }
         private static void titulo(){
