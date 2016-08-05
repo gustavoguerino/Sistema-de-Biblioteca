@@ -10,7 +10,6 @@ import biblioteca.acervo.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 /**
  *
  * @author maurodecarvalho
@@ -87,19 +86,37 @@ public class Biblioteca implements InterfaceBiblioteca {
 	}
 
 
+	//Aqui o método procura o titulo ou o autor (se for texto) e remove o indice
+	//em que o objeto estiver..
+	
+	//O loop exclui o primeiro elemento com o titulo ou o autor procurados, o break
+	//serve para de executar o loop, para que não se remova outros livros com titulos iguais.
 	//Removendo livros
-	//Poderemos fazer algum outro verificador aqui, mas a melhor saida
-	//que eu consegui pensar por enquanto foi essa.
-	public void removerLivro(int indice){
-
+	public void removerLivro(String tituloremov){
+		for(int i = 0; i < livros.size(); i++){
+			if(livros.get(i).getTitulo().equals(tituloremov)){
+				livros.remove(i);
+				break;
+			}
+		}
 	}
 	//Removendo Apostilas
-	public void removerApostila(int indice){
-
+	public void removerApostila(String tituloremov){
+		for(int i = 0; i < apostilas.size(); i++){
+			if(apostilas.get(i).getTitulo().equals(tituloremov)){
+				apostilas.remove(i);
+				break;
+			}
+		}
 	}
 	//Removendo Textos
-	public void removerTexto(int indice){
-
+	public void removerTexto(String tituloremov){
+		for(int i = 0; i < textos.size(); i++){
+			if(textos.get(i).getAutor().equals(tituloremov)){
+				textos.remove(i);
+				break;
+			}
+		}
 	}
 
 
@@ -110,6 +127,8 @@ public class Biblioteca implements InterfaceBiblioteca {
 		for(int i = 0; i<users.size(); i++){
 			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
 				confirm = true;
+				//adicionei um break aqui pra ele parar de procurar o usuario caso já tenha achado.
+				break;
 			}
 
 		}
