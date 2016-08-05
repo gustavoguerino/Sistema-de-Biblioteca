@@ -10,6 +10,7 @@ import biblioteca.acervo.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 /**
  *
  * @author maurodecarvalho
@@ -18,8 +19,11 @@ public class Biblioteca implements InterfaceBiblioteca {
 	private String nomeBiblioteca = "Biblioteca IFRN";
 	//Arrays Lists:
 	ArrayList<Usuario> users = new ArrayList<Usuario>();
+
 	ArrayList<Livro> livros = new ArrayList<Livro>();
+
 	ArrayList<Texto> textos = new ArrayList<Texto>();
+
 	ArrayList<Apostila> apostilas = new ArrayList<Apostila>();
 
 
@@ -58,7 +62,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		livro.setAutor(newAutor);
 		livro.setISBN(newIsbn);
 		livros.add(livro);
-		
+
 
 	}
 
@@ -76,7 +80,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 
 	//Metodo para cadastro de Textos
 	public void cadastrarTexto(String newAutor){
-		
+
 		Texto texto = new Texto();
 		texto.setAutor(newAutor);
 		textos.add(texto);
@@ -87,15 +91,15 @@ public class Biblioteca implements InterfaceBiblioteca {
 	//Poderemos fazer algum outro verificador aqui, mas a melhor saida
 	//que eu consegui pensar por enquanto foi essa.
 	public void removerLivro(int indice){
-		
+
 	}
 	//Removendo Apostilas
 	public void removerApostila(int indice){
-		
+
 	}
 	//Removendo Textos
 	public void removerTexto(int indice){
-		
+
 	}
 
 
@@ -107,9 +111,34 @@ public class Biblioteca implements InterfaceBiblioteca {
 			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
 				confirm = true;
 			}
-			
+
 		}
 		return confirm;
 	}
 
+
+	//Listar todos os Livros e o status.
+	public void listarLivros(){
+		for(int i = 0; i<livros.size();i++){
+			System.out.println(livros.get(i).getTitulo());
+			System.out.println(livros.get(i).isDisponivel());
+			System.out.println("---------------------------------------------");
+		}
+	}
+	//Listar todas as apostilas e o status
+	public void listarApostilas(){
+		for(int i = 0; i<apostilas.size(); i++){
+			System.out.println(apostilas.get(i).getTitulo());
+			System.out.println(apostilas.get(i).isDisponivel());
+			System.out.println("---------------------------------------------");
+		}
+	}
+	//Listar todos os textos e o status
+	public void listarTextos(){
+		for(int i = 0; i<textos.size(); i++){
+			System.out.println(textos.get(i).getAutor());
+			System.out.println(textos.get(i).isDisponivel());
+			System.out.println("---------------------------------------------");
+		}
+	}
 }

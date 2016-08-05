@@ -15,7 +15,11 @@ public interface InterfaceBiblioteca {
     void cadastrarLivro(String newTitulo, String newAutor, String newIsbm, int newEdicao, int newQuantidade);
     void cadastrarApostila(String newTitulo, String newAutor, int newQuantidade);
     void cadastrarTexto(String newAutor);
-    public void removerLivro(int indice);
-	public void removerApostila(int indice);
-	public void removerTexto(int indice);
+    void removerLivro(int indice);
+	void removerApostila(int indice);
+	void removerTexto(int indice);
+	void listarLivros();
+	void listarTextos();
+	void listarApostilas();
+	
 } 
