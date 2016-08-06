@@ -26,7 +26,7 @@ public interface InterfaceBiblioteca {
 	void listarApostilas();
 	int pesquisarAcervo(int item, String elemento);
 	boolean devolver();
-	boolean alugarLivro(String itemproc, Usuario usuario);
-	boolean alugarApostila(String itemproc, Usuario usuario);
-	boolean alugarTexto(String itemproc, Usuario usuario);
+	boolean alugarLivro(String itemproc);
+	boolean alugarApostila(String itemproc);
+	boolean alugarTexto(String itemproc);
 } 

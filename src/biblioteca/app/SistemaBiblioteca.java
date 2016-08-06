@@ -111,7 +111,7 @@ import biblioteca.*;
                         case "9":
                             alugar();
                             pularlinhas(100);
-                            System.out.println("\n\nBusca concluida.");
+                            System.out.println("\n\nAlugar concluido.");
                             break;
                         case "11":
                             buscar();
@@ -152,7 +152,7 @@ import biblioteca.*;
         }
         private static void alugar(){
             boolean parar = false, continuaralugar = false;
-            int tipoescolhido;
+            int tipoescolhido = 0;
             String textodoalugar;
             while (parar == false){
                 pularlinhas(100);
@@ -188,8 +188,8 @@ import biblioteca.*;
                 }
                 System.out.println("\nDigite 0 para buscar novamente, ou S para sair");
                 strread2 = read.nextLine();         
-                if((biblio.disponivelAlugar(3, textodoalugar) > 0) && (strread2.equals("3"))){
-                    tipoescolhido = 3;
+                if((biblio.disponivelAlugar(3, textodoalugar) > 0) && (strread2.equals("3"))){  //Se estiver disponivel, e o cara escolheu a opção 3
+                    tipoescolhido = 3;                                                          //Cai no loop de alugar e ativa o parar pra quando sair da parte do aluguel, retornar ao menu
                     continuaralugar = true;
                     parar = true;
                 }      
@@ -205,11 +205,76 @@ import biblioteca.*;
                 }      
                 else if(strread2.equals("s") || strread2.equals("S")){
                     parar = true;
-                }               
+                }   
+                int etapa = 0;
+                pularlinhas(100);
                 while(continuaralugar == true){
-                    System.out.println("Livro selecionado, Prosiga com a autenticação do usuario que vai alugar:"
-                            + "\n\n Digite o Usuario que deseja alugar:\n");
-                    strread3 = read.nextLine();
+                    if(etapa == 0){
+                        System.out.println("Livro selecionado, Prosiga com a autenticação do usuario que vai alugar:"
+                                + "\n\n Digite o Login que deseja alugar este livro:\n");
+                        strread3 = read.nextLine();
+                        if(biblio.usuarioExiste(strread3)){ 
+                            etapa = 1;
+                        }
+                        else
+                        {
+                            while(!biblio.usuarioExiste(strread3) || (continuaralugar == true)){
+                                pularlinhas(100);
+                                System.out.println("Usuario não existe, tente novamente: (0 para desistir)");
+                                strread3 = read.nextLine();
+                                etapa = 1;
+                                if(strread3.equals("0")){
+                                    continuaralugar = false;
+                                    etapa = 0;
+                                }
+                            }
+                        }
+                    }
+                    else if(etapa == 1){
+                        pularlinhas(100);
+                        System.out.println("Digite a senha:");
+                        strread4 = read.nextLine();
+                        if(biblio.autenticarAlugar(strread3,strread4)){
+                            etapa = 2;
+                        }
+                        else
+                        {
+                            while(!biblio.autenticarAlugar(strread3,strread4) || (continuaralugar == true)){
+                                pularlinhas(100);
+                                System.out.println("Senha não confere, tente novamente: (0 para desistir)");
+                                strread4 = read.nextLine();
+                                etapa = 2;
+                                if(strread4.equals("0")){
+                                    continuaralugar = false;
+                                    etapa = 1;
+                                }
+                            }
+                        }
+                    }else if(etapa == 2){
+                        pularlinhas(100);
+                        boolean sucesso = false;
+                        if(strread2.equals("1")){
+                            System.out.println("AlugaLivro chamado" + textodoalugar);
+                            sucesso = biblio.alugarLivro(textodoalugar);
+                            
+                        }else if(strread2.equals("2")){
+                            sucesso = biblio.alugarApostila(textodoalugar);
+                        }else if(strread2.equals("3")){
+                            sucesso = biblio.alugarTexto(textodoalugar);
+                        }
+                        pularlinhas(100);
+                        if(sucesso == false){      
+                            System.out.println("Aconteceu um erro, tente novamente!\nAperte enter para sair!");
+                            continuaralugar = false;
+                            read.nextLine();
+                        }
+                        else{
+                            System.out.println("Livro alugado com sucesso!\n Aperte enter para sair!");
+                            continuaralugar = false;
+                            read.nextLine();
+                        }
+                       
+                    }
                 }
                 
             }

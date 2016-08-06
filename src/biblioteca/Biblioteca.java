@@ -29,7 +29,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 	ArrayList<Apostila> apostilas = new ArrayList<Apostila>();
 
 
-	Scanner input = new Scanner(System.in);
+	Usuario logado, alugando;
 
 
 	public Biblioteca() {
@@ -132,14 +132,36 @@ public class Biblioteca implements InterfaceBiblioteca {
 		for(int i = 0; i<users.size(); i++){
 			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
 				confirm = true;
-				//adicionei um break aqui pra ele parar de procurar o usuario caso j� tenha achado.
+				logado = users.get(i);
 				break;
 			}
 
 		}
 		return confirm;
 	}
+        public boolean usuarioExiste(String usuario) {
+		boolean confirm = false;
+		for(int i = 0; i<users.size(); i++){
+			if(usuario.equals(users.get(i).getUsuario())){
+				confirm = true;
+				break;
+			}
 
+		}
+		return confirm;
+	}
+        public boolean autenticarAlugar(String usuario, String senha) {
+		boolean confirm = false;
+		for(int i = 0; i<users.size(); i++){
+			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
+				confirm = true;
+				alugando = users.get(i);
+				break;
+			}
+
+		}
+		return confirm;
+	}
 
 	//Listar todos os Livros e o status.
 	public void listarLivros(){
@@ -268,70 +290,82 @@ public class Biblioteca implements InterfaceBiblioteca {
 	}
 	
 	//Logica pai-mei da bahia de alugar um livro.. xD
-	public boolean alugarLivro(String itemproc, Usuario usuario){
+	public boolean alugarLivro(String itemproc){
 		boolean verificador = false;
+                System.out.println("ponto 5");
 		for(int i = 0; i<livros.size();i++){
-			if(((livros.get(i).getAutor().equals(itemproc)) || (livros.get(i).getTitulo().equals(itemproc))) && (livros.get(i).isDisponivel() == true)){
-				for(int a = 0; a < users.size(); a++){
-					if(users.get(a).getUsuario().equals(usuario) && (users.get(a).isPossuiItemAlugado()!=true)){
+                     System.out.println("ponto 6");
+                        if(alugando == null){
+                            System.out.println("Alugando = null");
+                            return verificador;   
+                        }
+                        else if(((livros.get(i).getTitulo().equals(itemproc))) && (livros.get(i).isDisponivel() == true)){
+                            System.out.println("ponto 2"); 
+                            if((alugando.isPossuiLivroAlugado()!=true)){
 						//o livro fica indisponivel
 						livros.get(i).setDisponivel(false);
 						//o usuario nao vai poder pegar outro item desse tipo
-						users.get(a).setPossuiItemAlugado(true);
+						alugando.setPossuiLivroAlugado(true);
 						//o livro que ele pegou vai ser jogado para o metodo que ira manipular as funcoes de livro, como a data de aluguel e devolucao
-						users.get(a).livroAlugado(livros.get(i));
+						alugando.livroAlugado(livros.get(i));
 						//confirma que o usuario conseguiu alugar o livro
 						verificador = true;
 						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+                                                alugando = null; //Limpa o alugando para evitar fraudes
+                                                 System.out.println("ponto 3");
 						return verificador;
-					}
-				}
+                            }
 			}
 		}
 		return verificador;
 	}
 
-	public boolean alugarApostila(String itemproc, Usuario usuario){
+	public boolean alugarApostila(String itemproc){
 		boolean verificador = false;
 		for(int i = 0; i<apostilas.size();i++){
-			if(((apostilas.get(i).getAutor().equals(itemproc)) || (apostilas.get(i).getTitulo().equals(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
-				for(int a = 0; a < users.size(); a++){
-					if(users.get(a).getUsuario().equals(usuario) && (users.get(a).isPossuiItemAlugado()!=true)){
+			if(alugando == null){
+                            return verificador;
+                        }
+                        else if(((apostilas.get(i).getTitulo().equals(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
+					if((alugando.isPossuiApostilaAlugada()!=true)){
 						//a apostila fica indisponivel
 						apostilas.get(i).setDisponivel(false);
 						//o usuario nao pode pegar mais nenhum item desse tipo
-						users.get(a).setPossuiItemAlugado(true);
+						alugando.setPossuiApostilaAlugada(true);
 						//verificador de que conseguiu alugar o livro
 						verificador = true;
 						//adiciona a apostila ao metodo que ira manipular as funcoes da apostila, como data de aluguel e devolucao
-						users.get(a).apostilaAlugada(apostilas.get(i));
+						alugando.apostilaAlugada(apostilas.get(i));
 						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+                                                alugando = null; //Limpa o alugando para evitar fraudes
 						return verificador;
+                                                
 					}
-				}
 			}
 		}
 		return verificador;
 	}
 
-	public boolean alugarTexto(String itemproc, Usuario usuario){
+	public boolean alugarTexto(String itemproc){
 		boolean verificador = false;
 		for(int i = 0; i<textos.size();i++){
-			if(((textos.get(i).getAutor().equals(itemproc)) || (textos.get(i).getTitulo().equals(itemproc))) && (textos.get(i).isDisponivel() == true)){
-				for(int a = 0; a < users.size(); a++){
-					if(users.get(a).getUsuario().equals(usuario) && (users.get(a).isPossuiItemAlugado()!=true)){
+			if(alugando == null){
+                            return verificador;
+                        }
+                        else if(((textos.get(i).getTitulo().equals(itemproc))) && (textos.get(i).isDisponivel() == true)){
+					if((alugando.isPossuiTextoAlugado()!=true)){
 						//o texto fica indisponivel para aluguel
 						textos.get(i).setDisponivel(false);
 						//o usuario nao vai poder alugar nenhum item desse tipo
-						users.get(a).setPossuiItemAlugado(true);
+						alugando.setPossuiTextoAlugado(true);
 						//verificador de que conseguiu alugar a apostila
 						verificador = true;
 						//adiciona o livro para o metodo que ira manipular as funcoes de texto, como data de aluguel e de devolucao
-						users.get(a).textoAlugado(textos.get(i));
+						alugando.textoAlugado(textos.get(i));
 						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+                                                alugando = null; //Limpa o alugando para evitar fraudes
 						return verificador;
 					}
-				}
 			}
 		}
 		return verificador;

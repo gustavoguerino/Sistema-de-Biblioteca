@@ -9,7 +9,7 @@ public class Usuario implements InterfaceUsuario{
     //======================================================================================================
     private int codUsuario;
     private String nome, endereco, cpf, usuario, senha;
-    private boolean possuiItemAlugado;
+    private boolean possuiItemAlugado, possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado;
     private ItemAcervo alugou;
     
     public int getCodUsuario() {
@@ -54,13 +54,24 @@ public class Usuario implements InterfaceUsuario{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }      
-    
-    public boolean isPossuiItemAlugado() {
-		return possuiItemAlugado;
+        public boolean isPossuiLivroAlugado() {
+		return possuiLivroAlugado;
 	}
-	public void setPossuiItemAlugado(boolean possuiItemAlugado) {
-		this.possuiItemAlugado = possuiItemAlugado;
+	public void setPossuiLivroAlugado(boolean possuiLivroAlugado) {
+		this.possuiLivroAlugado = possuiLivroAlugado;
 	}
+         public boolean isPossuiApostilaAlugada() {
+		return possuiApostilaAlugada;
+	}
+	public void setPossuiApostilaAlugada(boolean possuiApostilaAlugada) {
+		this.possuiApostilaAlugada = possuiApostilaAlugada;
+	}
+         public boolean isPossuiTextoAlugado() {
+		return possuiTextoAlugado;
+	}
+	public void setPossuiTextoAlugado(boolean possuiTextoAlugado) {
+		this.possuiTextoAlugado = possuiTextoAlugado;
+	}//possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado;
 	
 	public Usuario(){
 		
