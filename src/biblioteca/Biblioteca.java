@@ -196,5 +196,26 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return achou;
 	}
+	
+	public boolean alugarLivro(){
+		for(int i = 0; i<livros.size();i++){
+			livros.get(i).setDisponivel(false);
+		}
+	}
+	
+	public boolean alugarApostila(){
+		for(int i = 0; i<apostilas.size();i++){
+			apostilas.get(i).setDisponivel(false);
+		}
+	}
+	
+	public boolean alugarTexto(){
+		for(int i = 0; i<textos.size();i++){
+			textos.get(i).setDisponivel(false);
+		}
+	}
+
+	
+	public boolean devolver(){}
 
 }
