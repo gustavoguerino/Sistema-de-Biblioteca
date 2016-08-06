@@ -81,14 +81,14 @@ public class Biblioteca implements InterfaceBiblioteca {
 
 		Texto texto = new Texto();
 		texto.setAutor(newAutor);
-                texto.setTitulo(newTitulo);
+		texto.setTitulo(newTitulo);
 		textos.add(texto);
 	}
 
 
 	//Aqui o m�todo procura o titulo ou o autor (se for texto) e remove o indice
 	//em que o objeto estiver..
-	
+
 	//O loop exclui o primeiro elemento com o titulo ou o autor procurados, o break
 	//serve para de executar o loop, para que n�o se remova outros livros com titulos iguais.
 	//Removendo livros
@@ -160,4 +160,41 @@ public class Biblioteca implements InterfaceBiblioteca {
 			System.out.println("---------------------------------------------");
 		}
 	}
+	//M�todos para pesquisar um item no acervo, o usu�rio bota a op��o e o nome que ele procura
+	//o sistema ir� verificar se tem algum autor ou titulo do livro com o nome procurado..
+	public int pesquisarAcervo(int item, String elemento){
+		int achou = 0;
+		if(item == 1){
+			for(int i = 0; i<livros.size();i++){
+				if((livros.get(i).getAutor().equals(elemento)) || (livros.get(i).getTitulo().equals(elemento))){
+				System.out.println("Titulo: " + livros.get(i).getTitulo());
+				System.out.println("Autor: " + livros.get(i).getAutor());
+				System.out.println("Disponivel: " + livros.get(i).isDisponivel());
+				achou += 1;
+				}
+			}
+		}
+		if(item == 2){
+			for(int i = 0; i<apostilas.size();i++){
+				if((apostilas.get(i).getAutor().equals(elemento)) || (apostilas.get(i).getTitulo().equals(elemento))){
+				System.out.println("Titulo: " + apostilas.get(i).getTitulo());
+				System.out.println("Autor: " + apostilas.get(i).getAutor());
+				System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
+				achou += 1;
+				}
+			}
+		}
+		if(item == 3){
+			for(int i = 0; i<textos.size();i++){
+				if((textos.get(i).getAutor().equals(elemento)) || (textos.get(i).getTitulo().equals(elemento))){
+                                System.out.println("Titulo: " + textos.get(i).getTitulo());
+                                System.out.println("Autor: " + textos.get(i).getAutor());
+                                System.out.println("Disponivel: " + textos.get(i).isDisponivel());
+				achou += 1;
+				}
+			}
+		}
+		return achou;
+	}
+
 }

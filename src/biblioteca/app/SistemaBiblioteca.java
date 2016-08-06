@@ -108,6 +108,11 @@ import biblioteca.*;
                             pularlinhas(100);
                             System.out.println("\n\nProcesso de cadastro concluido.");
                             break;
+                        case "11":
+                            buscar();
+                            pularlinhas(100);
+                            System.out.println("\n\nBusca concluida.");
+                            break;
                     }
                     System.out.println("\n\nDigite algo para voltar ao menu.");
                     read.nextLine();
@@ -115,6 +120,26 @@ import biblioteca.*;
                 }
                                
             }
+        }
+        private static void buscar(){
+            pularlinhas(100);
+            System.out.println("\nDigite o termo de sua busca: (Titulo ou Autor)");
+            strread = read.nextLine();
+            pularlinhas(100);
+            System.out.println("Livros:\n");
+            if(biblio.pesquisarAcervo(1, strread) == 0){       
+                System.out.println("\nNenhum livro encontrado\n");
+            }
+            System.out.println("\nApostilas:\n");
+            if(biblio.pesquisarAcervo(2, strread) == 0){       
+                System.out.println("\nNenhuma apostila encontrada\n");
+            }
+            System.out.println("\nTextos:\n");
+            if(biblio.pesquisarAcervo(3, strread) == 0){       
+                System.out.println("\nNenhum texto encontrado\n");
+            }
+            System.out.println("\n\nDigite algo para voltar ao menu.");
+            read.nextLine();
         }
         private static boolean isInt(String str) {
             boolean isInteger = true;
