@@ -3,6 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+// VERIFICAR SE O LIVRO NÃO ESTA INDISPONIVEL ANTES DE REMOVER ELE!
+// FAZER UM METODO 
 package biblioteca;
 
 import biblioteca.usuario.Usuario;
@@ -92,6 +95,8 @@ public class Biblioteca implements InterfaceBiblioteca {
 	//O loop exclui o primeiro elemento com o titulo ou o autor procurados, o break
 	//serve para de executar o loop, para que n�o se remova outros livros com titulos iguais.
 	//Removendo livros
+        
+        
 	public void removerLivro(String tituloremov){
 		for(int i = 0; i < livros.size(); i++){
 			if(livros.get(i).getTitulo().equals(tituloremov)){
@@ -196,26 +201,59 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return achou;
 	}
-	
+	public int escolherItemParaAlugar(int item, String elemento){ //Vai receber o titulo exato do livro, texto ou apostila
+                                                                        // só chega a ser chamado se tiver apenas 1 item na busca
+		int achou = 0;
+		if(item == 1){
+			for(int i = 0; i<livros.size();i++){
+				if((livros.get(i).getAutor().equals(elemento)) || (livros.get(i).getTitulo().equals(elemento))){
+                                    //OBJETO ESCOLHIDO É ESSE
+                                    break;
+				}
+			}
+		}
+		if(item == 2){
+			for(int i = 0; i<apostilas.size();i++){
+				if((apostilas.get(i).getAutor().equals(elemento)) || (apostilas.get(i).getTitulo().equals(elemento))){
+                                    //OBJETO ESCOLHIDO É ESSE
+                                    break;
+				}
+			}
+		}
+		if(item == 3){
+			for(int i = 0; i<textos.size();i++){
+				if((textos.get(i).getAutor().equals(elemento)) || (textos.get(i).getTitulo().equals(elemento))){
+                                    //OBJETO ESCOLHIDO É ESSE
+                                    break;
+				}
+			}
+		}
+		return achou;
+	}	
 	public boolean alugarLivro(){
 		for(int i = 0; i<livros.size();i++){
 			livros.get(i).setDisponivel(false);
 		}
+                return true;
 	}
 	
 	public boolean alugarApostila(){
 		for(int i = 0; i<apostilas.size();i++){
 			apostilas.get(i).setDisponivel(false);
 		}
+                return true;
 	}
 	
 	public boolean alugarTexto(){
 		for(int i = 0; i<textos.size();i++){
 			textos.get(i).setDisponivel(false);
 		}
+                return true;
 	}
 
 	
-	public boolean devolver(){}
+	public boolean devolver(){
+            return true;
+        }
 
 }

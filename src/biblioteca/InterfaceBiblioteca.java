@@ -22,7 +22,6 @@ public interface InterfaceBiblioteca {
 	void listarTextos();
 	void listarApostilas();
 	int pesquisarAcervo(int item, String elemento);
-	boolean alugar();
 	boolean devolver();
 	boolean alugarLivro();
 	boolean alugarApostila();

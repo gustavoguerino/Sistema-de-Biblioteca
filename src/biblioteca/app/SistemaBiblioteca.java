@@ -109,7 +109,7 @@ import biblioteca.*;
                             System.out.println("\n\nProcesso de cadastro concluido.");
                             break;
                         case "11":
-                            buscar();
+                            buscar(1);
                             pularlinhas(100);
                             System.out.println("\n\nBusca concluida.");
                             break;
@@ -121,25 +121,61 @@ import biblioteca.*;
                                
             }
         }
-        private static void buscar(){
-            pularlinhas(100);
-            System.out.println("\nDigite o termo de sua busca: (Titulo ou Autor)");
-            strread = read.nextLine();
-            pularlinhas(100);
-            System.out.println("Livros:\n");
-            if(biblio.pesquisarAcervo(1, strread) == 0){       
-                System.out.println("\nNenhum livro encontrado\n");
+        private static void buscar(int opcao){
+            boolean parar = false;
+            while (parar = false){
+                pularlinhas(100);
+                System.out.println("\nDigite o termo de sua busca: (Titulo ou Autor)");
+                strread = read.nextLine();
+                pularlinhas(100);
+                System.out.println("Livros:\n");
+                int itensLivro = biblio.pesquisarAcervo(1, strread);
+                if(itensLivro == 0){       
+                    System.out.println("\nNenhum livro encontrado\n");
+                }
+                System.out.println("\nApostilas:\n");
+                int itensApostila = biblio.pesquisarAcervo(2, strread);
+                if(itensApostila == 0){       
+                    System.out.println("\nNenhuma apostila encontrada\n");
+                }
+                System.out.println("\nTextos:\n");
+                int itensTexto = biblio.pesquisarAcervo(3, strread);
+                if(itensTexto == 0){       
+                    System.out.println("\nNenhum texto encontrado\n");
+                }
+                if(opcao == 2){
+                    if(itensTexto > 1){
+                        System.out.println("\n\nSe deseja alugar algum dos textos mostrados, refine sua fusca para que apareça apenas 1 item!");
+                    }else if(itensTexto == 1){
+                        System.out.println("\n\nPara alugar o texto, digite: 3");
+                    }
+                    if(itensApostila > 1){
+                        System.out.println("\n\nSe deseja alugar alguma das apostilas mostradas, refine sua fusca para que apareça apenas 1 item!");
+                    }else if(itensApostila == 1){
+                        System.out.println("\n\nPara alugar a apostila, digite: 2");
+                    }
+                    if(itensLivro > 1){
+                        System.out.println("\n\nSe deseja alugar algum dos livros mostrados, refine sua fusca para que apareça apenas 1 item!");
+                    }else if(itensLivro == 1){
+                        System.out.println("\n\nPara alugar o livro, digite: 1");
+                    }
+                    System.out.println("\nDigite 0 para buscar novamente, ou S para sair");
+                    strread2 = read.nextLine();  
+                    if((itensLivro > 0) || (itensApostila > 0) || (itensTexto > 0)){
+                        // verificar a entrada do usuario
+                    }else{             
+                        if(strread2.equals("s") || strread2.equals("S")){
+                            parar = true;
+                        }                        
+                    }
+
+                }else{
+                    System.out.println("\n\nDigite algo para voltar ao menu.");
+                    read.nextLine();  
+                    parar = true;
+                }                
             }
-            System.out.println("\nApostilas:\n");
-            if(biblio.pesquisarAcervo(2, strread) == 0){       
-                System.out.println("\nNenhuma apostila encontrada\n");
-            }
-            System.out.println("\nTextos:\n");
-            if(biblio.pesquisarAcervo(3, strread) == 0){       
-                System.out.println("\nNenhum texto encontrado\n");
-            }
-            System.out.println("\n\nDigite algo para voltar ao menu.");
-            read.nextLine();
+            
         }
         private static boolean isInt(String str) {
             boolean isInteger = true;

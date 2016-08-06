@@ -74,7 +74,6 @@ public class Usuario implements InterfaceUsuario{
         }
     }
     public void escolherItemAcervo(ItemAcervo itemEscolhido){
-           itemEscolhido.alugar(this);
            alugou = itemEscolhido;
     }
 	
