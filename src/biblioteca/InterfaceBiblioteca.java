@@ -29,4 +29,5 @@ public interface InterfaceBiblioteca {
 	boolean alugarLivro(String itemproc);
 	boolean alugarApostila(String itemproc);
 	boolean alugarTexto(String itemproc);
+        boolean podeAlugar(String usuario);
 } 

@@ -382,4 +382,9 @@ public class Biblioteca implements InterfaceBiblioteca {
 		
 		return true;
 	}
+
+    @Override
+    public boolean podeAlugar(String usuario) {
+        return false;
+    }
 }

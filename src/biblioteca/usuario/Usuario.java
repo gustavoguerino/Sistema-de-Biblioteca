@@ -102,4 +102,9 @@ public class Usuario implements InterfaceUsuario{
 	public void textoAlugado(Texto texto){}
 	public void livroAlugado(Livro livro){}
 
+    @Override
+    public boolean temAtraso() {
+        return false;
+    }
+
 }
