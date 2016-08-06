@@ -95,8 +95,8 @@ public class Biblioteca implements InterfaceBiblioteca {
 	//O loop exclui o primeiro elemento com o titulo ou o autor procurados, o break
 	//serve para de executar o loop, para que n�o se remova outros livros com titulos iguais.
 	//Removendo livros
-        
-        
+
+
 	public void removerLivro(String tituloremov){
 		for(int i = 0; i < livros.size(); i++){
 			if(livros.get(i).getTitulo().equals(tituloremov)){
@@ -172,88 +172,110 @@ public class Biblioteca implements InterfaceBiblioteca {
 		if(item == 1){
 			for(int i = 0; i<livros.size();i++){
 				if((livros.get(i).getAutor().equals(elemento)) || (livros.get(i).getTitulo().equals(elemento))){
-				System.out.println("Titulo: " + livros.get(i).getTitulo());
-				System.out.println("Autor: " + livros.get(i).getAutor());
-				System.out.println("Disponivel: " + livros.get(i).isDisponivel());
-				achou += 1;
+					System.out.println("Titulo: " + livros.get(i).getTitulo());
+					System.out.println("Autor: " + livros.get(i).getAutor());
+					System.out.println("Disponivel: " + livros.get(i).isDisponivel());
+					achou += 1;
 				}
 			}
 		}
 		if(item == 2){
 			for(int i = 0; i<apostilas.size();i++){
 				if((apostilas.get(i).getAutor().equals(elemento)) || (apostilas.get(i).getTitulo().equals(elemento))){
-				System.out.println("Titulo: " + apostilas.get(i).getTitulo());
-				System.out.println("Autor: " + apostilas.get(i).getAutor());
-				System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
-				achou += 1;
+					System.out.println("Titulo: " + apostilas.get(i).getTitulo());
+					System.out.println("Autor: " + apostilas.get(i).getAutor());
+					System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
+					achou += 1;
 				}
 			}
 		}
 		if(item == 3){
 			for(int i = 0; i<textos.size();i++){
 				if((textos.get(i).getAutor().equals(elemento)) || (textos.get(i).getTitulo().equals(elemento))){
-                                System.out.println("Titulo: " + textos.get(i).getTitulo());
-                                System.out.println("Autor: " + textos.get(i).getAutor());
-                                System.out.println("Disponivel: " + textos.get(i).isDisponivel());
-				achou += 1;
+					System.out.println("Titulo: " + textos.get(i).getTitulo());
+					System.out.println("Autor: " + textos.get(i).getAutor());
+					System.out.println("Disponivel: " + textos.get(i).isDisponivel());
+					achou += 1;
 				}
 			}
 		}
 		return achou;
-	}
-	public int escolherItemParaAlugar(int item, String elemento){ //Vai receber o titulo exato do livro, texto ou apostila
-                                                                        // só chega a ser chamado se tiver apenas 1 item na busca
-		int achou = 0;
-		if(item == 1){
-			for(int i = 0; i<livros.size();i++){
-				if((livros.get(i).getAutor().equals(elemento)) || (livros.get(i).getTitulo().equals(elemento))){
-                                    //OBJETO ESCOLHIDO É ESSE
-                                    break;
-				}
-			}
-		}
-		if(item == 2){
-			for(int i = 0; i<apostilas.size();i++){
-				if((apostilas.get(i).getAutor().equals(elemento)) || (apostilas.get(i).getTitulo().equals(elemento))){
-                                    //OBJETO ESCOLHIDO É ESSE
-                                    break;
-				}
-			}
-		}
-		if(item == 3){
-			for(int i = 0; i<textos.size();i++){
-				if((textos.get(i).getAutor().equals(elemento)) || (textos.get(i).getTitulo().equals(elemento))){
-                                    //OBJETO ESCOLHIDO É ESSE
-                                    break;
-				}
-			}
-		}
-		return achou;
-	}	
-	public boolean alugarLivro(){
-		for(int i = 0; i<livros.size();i++){
-			livros.get(i).setDisponivel(false);
-		}
-                return true;
-	}
-	
-	public boolean alugarApostila(){
-		for(int i = 0; i<apostilas.size();i++){
-			apostilas.get(i).setDisponivel(false);
-		}
-                return true;
-	}
-	
-	public boolean alugarTexto(){
-		for(int i = 0; i<textos.size();i++){
-			textos.get(i).setDisponivel(false);
-		}
-                return true;
 	}
 
 	
+	//Logica pai-mei da bahia de alugar um livro.. xD
+	public boolean alugarLivro(String itemproc, Usuario usuario){
+		boolean verificador = false;
+		for(int i = 0; i<livros.size();i++){
+			if(((livros.get(i).getAutor().equals(itemproc)) || (livros.get(i).getTitulo().equals(itemproc))) && (livros.get(i).isDisponivel() == true)){
+				for(int a = 0; a < users.size(); a++){
+					if(users.get(a).getUsuario().equals(usuario) && (users.get(a).isPossuiItemAlugado()!=true)){
+						//o livro fica indisponivel
+						livros.get(i).setDisponivel(false);
+						//o usuario nao vai poder pegar outro item desse tipo
+						users.get(a).setPossuiItemAlugado(true);
+						//o livro que ele pegou vai ser jogado para o metodo que ira manipular as funcoes de livro, como a data de aluguel e devolucao
+						users.get(a).livroAlugado(livros.get(i));
+						//confirma que o usuario conseguiu alugar o livro
+						verificador = true;
+						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+						return verificador;
+					}
+				}
+			}
+		}
+		return verificador;
+	}
+
+	public boolean alugarApostila(String itemproc, Usuario usuario){
+		boolean verificador = false;
+		for(int i = 0; i<apostilas.size();i++){
+			if(((apostilas.get(i).getAutor().equals(itemproc)) || (apostilas.get(i).getTitulo().equals(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
+				for(int a = 0; a < users.size(); a++){
+					if(users.get(a).getUsuario().equals(usuario) && (users.get(a).isPossuiItemAlugado()!=true)){
+						//a apostila fica indisponivel
+						apostilas.get(i).setDisponivel(false);
+						//o usuario nao pode pegar mais nenhum item desse tipo
+						users.get(a).setPossuiItemAlugado(true);
+						//verificador de que conseguiu alugar o livro
+						verificador = true;
+						//adiciona a apostila ao metodo que ira manipular as funcoes da apostila, como data de aluguel e devolucao
+						users.get(a).apostilaAlugada(apostilas.get(i));
+						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+						return verificador;
+					}
+				}
+			}
+		}
+		return verificador;
+	}
+
+	public boolean alugarTexto(String itemproc, Usuario usuario){
+		boolean verificador = false;
+		for(int i = 0; i<textos.size();i++){
+			if(((textos.get(i).getAutor().equals(itemproc)) || (textos.get(i).getTitulo().equals(itemproc))) && (textos.get(i).isDisponivel() == true)){
+				for(int a = 0; a < users.size(); a++){
+					if(users.get(a).getUsuario().equals(usuario) && (users.get(a).isPossuiItemAlugado()!=true)){
+						//o texto fica indisponivel para aluguel
+						textos.get(i).setDisponivel(false);
+						//o usuario nao vai poder alugar nenhum item desse tipo
+						users.get(a).setPossuiItemAlugado(true);
+						//verificador de que conseguiu alugar a apostila
+						verificador = true;
+						//adiciona o livro para o metodo que ira manipular as funcoes de texto, como data de aluguel e de devolucao
+						users.get(a).textoAlugado(textos.get(i));
+						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+						return verificador;
+					}
+				}
+			}
+		}
+		return verificador;
+	}
+
+	//Devolucao de um livro
 	public boolean devolver(){
-            return true;
-        }
+		return true;
+	}
 
 }
