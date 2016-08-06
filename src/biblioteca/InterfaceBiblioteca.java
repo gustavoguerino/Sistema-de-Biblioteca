@@ -21,5 +21,6 @@ public interface InterfaceBiblioteca {
 	void listarLivros();
 	void listarTextos();
 	void listarApostilas();
+	int pesquisarAcervo(int item, String elemento);
 	
 } 
