@@ -1,9 +1,12 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package biblioteca;
+
+import biblioteca.usuario.Usuario;
 
 /**
  *
@@ -23,7 +26,7 @@ public interface InterfaceBiblioteca {
 	void listarApostilas();
 	int pesquisarAcervo(int item, String elemento);
 	boolean devolver();
-	boolean alugarLivro();
-	boolean alugarApostila();
-	boolean alugarTexto();
+	boolean alugarLivro(String itemproc, Usuario usuario);
+	boolean alugarApostila(String itemproc, Usuario usuario);
+	boolean alugarTexto(String itemproc, Usuario usuario);
 } 

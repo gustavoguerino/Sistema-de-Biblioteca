@@ -201,7 +201,71 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return achou;
 	}
-
+        public int pesquisarAluguel(int item, String elemento){
+		int achou = 0;
+		if(item == 1){
+			for(int i = 0; i<livros.size();i++){
+				if((livros.get(i).getTitulo().equals(elemento))){
+					System.out.println("Titulo: " + livros.get(i).getTitulo());
+					System.out.println("Autor: " + livros.get(i).getAutor());
+					System.out.println("Disponivel: " + livros.get(i).isDisponivel());
+					achou += 1;
+				}
+			}
+		}
+		if(item == 2){
+			for(int i = 0; i<apostilas.size();i++){
+				if((apostilas.get(i).getTitulo().equals(elemento))){
+					System.out.println("Titulo: " + apostilas.get(i).getTitulo());
+					System.out.println("Autor: " + apostilas.get(i).getAutor());
+					System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
+					achou += 1;
+				}
+			}
+		}
+		if(item == 3){
+			for(int i = 0; i<textos.size();i++){
+				if((textos.get(i).getTitulo().equals(elemento))){
+					System.out.println("Titulo: " + textos.get(i).getTitulo());
+					System.out.println("Autor: " + textos.get(i).getAutor());
+					System.out.println("Disponivel: " + textos.get(i).isDisponivel());
+					achou += 1;
+				}
+			}
+		}
+		return achou;
+	}
+	public int disponivelAlugar(int item, String elemento){
+		int achou = 0;
+		if(item == 1){
+			for(int i = 0; i<livros.size();i++){
+				if((livros.get(i).getTitulo().equals(elemento))){
+					if(livros.get(i).isDisponivel() == true){
+                                           achou += 1; 
+                                        }
+				}
+			}
+		}
+		if(item == 2){
+			for(int i = 0; i<apostilas.size();i++){
+				if((apostilas.get(i).getTitulo().equals(elemento))){
+					if(apostilas.get(i).isDisponivel() == true){
+                                            achou += 1;
+                                        }
+				}
+			}
+		}
+		if(item == 3){
+			for(int i = 0; i<textos.size();i++){
+				if((textos.get(i).getTitulo().equals(elemento))){
+                                    if(textos.get(i).isDisponivel() == true){
+                                        achou += 1;
+                                    }
+				}
+			}
+		}
+		return achou;
+	}
 	
 	//Logica pai-mei da bahia de alugar um livro.. xD
 	public boolean alugarLivro(String itemproc, Usuario usuario){
@@ -277,5 +341,4 @@ public class Biblioteca implements InterfaceBiblioteca {
 	public boolean devolver(){
 		return true;
 	}
-
 }

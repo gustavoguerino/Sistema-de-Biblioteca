@@ -108,8 +108,13 @@ import biblioteca.*;
                             pularlinhas(100);
                             System.out.println("\n\nProcesso de cadastro concluido.");
                             break;
+                        case "9":
+                            alugar();
+                            pularlinhas(100);
+                            System.out.println("\n\nBusca concluida.");
+                            break;
                         case "11":
-                            buscar(1);
+                            buscar();
                             pularlinhas(100);
                             System.out.println("\n\nBusca concluida.");
                             break;
@@ -121,9 +126,7 @@ import biblioteca.*;
                                
             }
         }
-        private static void buscar(int opcao){
-            boolean parar = false;
-            while (parar = false){
+        private static void buscar(){
                 pularlinhas(100);
                 System.out.println("\nDigite o termo de sua busca: (Titulo ou Autor)");
                 strread = read.nextLine();
@@ -143,37 +146,72 @@ import biblioteca.*;
                 if(itensTexto == 0){       
                     System.out.println("\nNenhum texto encontrado\n");
                 }
-                if(opcao == 2){
-                    if(itensTexto > 1){
-                        System.out.println("\n\nSe deseja alugar algum dos textos mostrados, refine sua fusca para que apareça apenas 1 item!");
-                    }else if(itensTexto == 1){
-                        System.out.println("\n\nPara alugar o texto, digite: 3");
-                    }
-                    if(itensApostila > 1){
-                        System.out.println("\n\nSe deseja alugar alguma das apostilas mostradas, refine sua fusca para que apareça apenas 1 item!");
-                    }else if(itensApostila == 1){
-                        System.out.println("\n\nPara alugar a apostila, digite: 2");
-                    }
-                    if(itensLivro > 1){
-                        System.out.println("\n\nSe deseja alugar algum dos livros mostrados, refine sua fusca para que apareça apenas 1 item!");
-                    }else if(itensLivro == 1){
+ 
+                System.out.println("\n\nDigite algo para voltar ao menu.");
+                read.nextLine();        
+        }
+        private static void alugar(){
+            boolean parar = false, continuaralugar = false;
+            int tipoescolhido;
+            String textodoalugar;
+            while (parar == false){
+                pularlinhas(100);
+                System.out.println("\nDigite o titulo do livro:");
+                textodoalugar = read.nextLine();
+                pularlinhas(100);
+                System.out.println("Livros:\n");
+                int itensLivro = biblio.pesquisarAluguel(1, textodoalugar);
+                if(itensLivro == 0){       
+                    System.out.println("\nNenhum livro encontrado\n");
+                }else{
+                    if(biblio.disponivelAlugar(1,textodoalugar) > 0){
                         System.out.println("\n\nPara alugar o livro, digite: 1");
                     }
-                    System.out.println("\nDigite 0 para buscar novamente, ou S para sair");
-                    strread2 = read.nextLine();  
-                    if((itensLivro > 0) || (itensApostila > 0) || (itensTexto > 0)){
-                        // verificar a entrada do usuario
-                    }else{             
-                        if(strread2.equals("s") || strread2.equals("S")){
-                            parar = true;
-                        }                        
-                    }
-
+                }
+                System.out.println("\nApostilas:\n");
+                int itensApostila = biblio.pesquisarAluguel(2, textodoalugar);
+                if(itensApostila == 0){       
+                    System.out.println("\nNenhuma apostila encontrada\n");
                 }else{
-                    System.out.println("\n\nDigite algo para voltar ao menu.");
-                    read.nextLine();  
+                    if(biblio.disponivelAlugar(2,textodoalugar) > 0){
+                        System.out.println("\n\nPara alugar a apostila, digite: 2");
+                    }
+                }
+                System.out.println("\nTextos:\n");
+                int itensTexto = biblio.pesquisarAluguel(3, textodoalugar);
+                if(itensTexto == 0){       
+                    System.out.println("\nNenhum texto encontrado\n");
+                }else{
+                    if(biblio.disponivelAlugar(3,textodoalugar) > 0){
+                        System.out.println("\n\nPara alugar o texto, digite: 3");
+                    }
+                }
+                System.out.println("\nDigite 0 para buscar novamente, ou S para sair");
+                strread2 = read.nextLine();         
+                if((biblio.disponivelAlugar(3, textodoalugar) > 0) && (strread2.equals("3"))){
+                    tipoescolhido = 3;
+                    continuaralugar = true;
                     parar = true;
-                }                
+                }      
+                else if((biblio.disponivelAlugar(2, textodoalugar) > 0) && (strread2.equals("2"))){
+                    tipoescolhido = 2;
+                    continuaralugar = true;
+                    parar = true;
+                }      
+                else if((biblio.disponivelAlugar(1, textodoalugar) > 0) && (strread2.equals("1"))){
+                    tipoescolhido = 1;
+                    continuaralugar = true;
+                    parar = true;
+                }      
+                else if(strread2.equals("s") || strread2.equals("S")){
+                    parar = true;
+                }               
+                while(continuaralugar == true){
+                    System.out.println("Livro selecionado, Prosiga com a autenticação do usuario que vai alugar:"
+                            + "\n\n Digite o Usuario que deseja alugar:\n");
+                    strread3 = read.nextLine();
+                }
+                
             }
             
         }
