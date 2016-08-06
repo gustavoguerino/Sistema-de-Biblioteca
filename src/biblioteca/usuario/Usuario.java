@@ -1,6 +1,6 @@
 package biblioteca.usuario;
 
-import biblioteca.acervo.ItemAcervo;
+import biblioteca.acervo.*;
 
 public class Usuario implements InterfaceUsuario{
     //==============Gustavo=================================================================================
@@ -9,6 +9,7 @@ public class Usuario implements InterfaceUsuario{
     //======================================================================================================
     private int codUsuario;
     private String nome, endereco, cpf, usuario, senha;
+    private boolean possuiItemAlugado;
     private ItemAcervo alugou;
     
     public int getCodUsuario() {
@@ -53,7 +54,15 @@ public class Usuario implements InterfaceUsuario{
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }      
-    public Usuario(){
+    
+    public boolean isPossuiItemAlugado() {
+		return possuiItemAlugado;
+	}
+	public void setPossuiItemAlugado(boolean possuiItemAlugado) {
+		this.possuiItemAlugado = possuiItemAlugado;
+	}
+	
+	public Usuario(){
 		
     }
     public void pagar() {
@@ -76,6 +85,10 @@ public class Usuario implements InterfaceUsuario{
     public void escolherItemAcervo(ItemAcervo itemEscolhido){
            alugou = itemEscolhido;
     }
-	
+    
+    //metodos para armazenar o item q o usuario alugou.
+	public void apostilaAlugada(Apostila apostila){}
+	public void textoAlugado(Texto texto){}
+	public void livroAlugado(Livro livro){}
 
 }

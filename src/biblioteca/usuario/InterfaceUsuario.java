@@ -5,7 +5,7 @@
  */
 package biblioteca.usuario;
 
-import biblioteca.acervo.ItemAcervo;
+import biblioteca.acervo.*;
 
 /**
  *
@@ -14,4 +14,7 @@ import biblioteca.acervo.ItemAcervo;
 public interface InterfaceUsuario {
     void pagar();
     void escolherItemAcervo(ItemAcervo itemEscolhido);
+    void apostilaAlugada(Apostila apostila);
+    void textoAlugado(Texto texto);
+    void livroAlugado(Livro livro);
 }
