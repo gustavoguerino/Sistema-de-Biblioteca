@@ -139,7 +139,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return confirm;
 	}
-        public boolean usuarioExiste(String usuario) {
+	public boolean usuarioExiste(String usuario) {
 		boolean confirm = false;
 		for(int i = 0; i<users.size(); i++){
 			if(usuario.equals(users.get(i).getUsuario())){
@@ -150,7 +150,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return confirm;
 	}
-        public boolean autenticarAlugar(String usuario, String senha) {
+	public boolean autenticarAlugar(String usuario, String senha) {
 		boolean confirm = false;
 		for(int i = 0; i<users.size(); i++){
 			if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
@@ -223,7 +223,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return achou;
 	}
-        public int pesquisarAluguel(int item, String elemento){
+	public int pesquisarAluguel(int item, String elemento){
 		int achou = 0;
 		if(item == 1){
 			for(int i = 0; i<livros.size();i++){
@@ -263,8 +263,8 @@ public class Biblioteca implements InterfaceBiblioteca {
 			for(int i = 0; i<livros.size();i++){
 				if((livros.get(i).getTitulo().equals(elemento))){
 					if(livros.get(i).isDisponivel() == true){
-                                           achou += 1; 
-                                        }
+						achou += 1; 
+					}
 				}
 			}
 		}
@@ -272,49 +272,51 @@ public class Biblioteca implements InterfaceBiblioteca {
 			for(int i = 0; i<apostilas.size();i++){
 				if((apostilas.get(i).getTitulo().equals(elemento))){
 					if(apostilas.get(i).isDisponivel() == true){
-                                            achou += 1;
-                                        }
+						achou += 1;
+					}
 				}
 			}
 		}
 		if(item == 3){
 			for(int i = 0; i<textos.size();i++){
 				if((textos.get(i).getTitulo().equals(elemento))){
-                                    if(textos.get(i).isDisponivel() == true){
-                                        achou += 1;
-                                    }
+					if(textos.get(i).isDisponivel() == true){
+						achou += 1;
+					}
 				}
 			}
 		}
 		return achou;
 	}
-	
+
 	//Logica pai-mei da bahia de alugar um livro.. xD
 	public boolean alugarLivro(String itemproc){
 		boolean verificador = false;
-                System.out.println("ponto 5");
+		System.out.println("ponto 5");
 		for(int i = 0; i<livros.size();i++){
-                     System.out.println("ponto 6");
-                        if(alugando == null){
-                            System.out.println("Alugando = null");
-                            return verificador;   
-                        }
-                        else if(((livros.get(i).getTitulo().equals(itemproc))) && (livros.get(i).isDisponivel() == true)){
-                            System.out.println("ponto 2"); 
-                            if((alugando.isPossuiLivroAlugado()!=true)){
-						//o livro fica indisponivel
-						livros.get(i).setDisponivel(false);
-						//o usuario nao vai poder pegar outro item desse tipo
-						alugando.setPossuiLivroAlugado(true);
-						//o livro que ele pegou vai ser jogado para o metodo que ira manipular as funcoes de livro, como a data de aluguel e devolucao
-						alugando.livroAlugado(livros.get(i));
-						//confirma que o usuario conseguiu alugar o livro
-						verificador = true;
-						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
-                                                alugando = null; //Limpa o alugando para evitar fraudes
-                                                 System.out.println("ponto 3");
-						return verificador;
-                            }
+			System.out.println("ponto 6");
+			if(alugando == null){
+				System.out.println("Alugando = null");
+				return verificador;   
+			}
+			else if(((livros.get(i).getTitulo().equals(itemproc))) && (livros.get(i).isDisponivel() == true)){
+				System.out.println("ponto 2"); 
+				if((alugando.isPossuiLivroAlugado()!=true)){
+					//o livro fica indisponivel
+					livros.get(i).setDisponivel(false);
+					//o usuario nao vai poder pegar outro item desse tipo
+					alugando.setPossuiLivroAlugado(true);
+					//seta o dia q o usuario alugou o livro
+					livros.get(i).diaAlugado();
+					//o livro que ele pegou vai ser jogado para o metodo que ira manipular as funcoes de livro, como a data de aluguel e devolucao
+					alugando.livroAlugado(livros.get(i));
+					//confirma que o usuario conseguiu alugar o livro
+					verificador = true;
+					//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+					alugando = null; //Limpa o alugando para evitar fraudes
+					System.out.println("ponto 3");
+					return verificador;
+				}
 			}
 		}
 		return verificador;
@@ -324,23 +326,25 @@ public class Biblioteca implements InterfaceBiblioteca {
 		boolean verificador = false;
 		for(int i = 0; i<apostilas.size();i++){
 			if(alugando == null){
-                            return verificador;
-                        }
-                        else if(((apostilas.get(i).getTitulo().equals(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
-					if((alugando.isPossuiApostilaAlugada()!=true)){
-						//a apostila fica indisponivel
-						apostilas.get(i).setDisponivel(false);
-						//o usuario nao pode pegar mais nenhum item desse tipo
-						alugando.setPossuiApostilaAlugada(true);
-						//verificador de que conseguiu alugar o livro
-						verificador = true;
-						//adiciona a apostila ao metodo que ira manipular as funcoes da apostila, como data de aluguel e devolucao
-						alugando.apostilaAlugada(apostilas.get(i));
-						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
-                                                alugando = null; //Limpa o alugando para evitar fraudes
-						return verificador;
-                                                
-					}
+				return verificador;
+			}
+			else if(((apostilas.get(i).getTitulo().equals(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
+				if((alugando.isPossuiApostilaAlugada()!=true)){
+					//a apostila fica indisponivel
+					apostilas.get(i).setDisponivel(false);
+					//o usuario nao pode pegar mais nenhum item desse tipo
+					alugando.setPossuiApostilaAlugada(true);
+					//verificador de que conseguiu alugar o livro
+					verificador = true;
+					//Seta o dia que o usuario alugou o livro
+					apostilas.get(i).diaAlugado();
+					//adiciona a apostila ao metodo que ira manipular as funcoes da apostila, como data de aluguel e devolucao
+					alugando.apostilaAlugada(apostilas.get(i));
+					//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+					alugando = null; //Limpa o alugando para evitar fraudes
+					return verificador;
+
+				}
 			}
 		}
 		return verificador;
@@ -350,22 +354,24 @@ public class Biblioteca implements InterfaceBiblioteca {
 		boolean verificador = false;
 		for(int i = 0; i<textos.size();i++){
 			if(alugando == null){
-                            return verificador;
-                        }
-                        else if(((textos.get(i).getTitulo().equals(itemproc))) && (textos.get(i).isDisponivel() == true)){
-					if((alugando.isPossuiTextoAlugado()!=true)){
-						//o texto fica indisponivel para aluguel
-						textos.get(i).setDisponivel(false);
-						//o usuario nao vai poder alugar nenhum item desse tipo
-						alugando.setPossuiTextoAlugado(true);
-						//verificador de que conseguiu alugar a apostila
-						verificador = true;
-						//adiciona o livro para o metodo que ira manipular as funcoes de texto, como data de aluguel e de devolucao
-						alugando.textoAlugado(textos.get(i));
-						//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
-                                                alugando = null; //Limpa o alugando para evitar fraudes
-						return verificador;
-					}
+				return verificador;
+			}
+			else if(((textos.get(i).getTitulo().equals(itemproc))) && (textos.get(i).isDisponivel() == true)){
+				if((alugando.isPossuiTextoAlugado()!=true)){
+					//o texto fica indisponivel para aluguel
+					textos.get(i).setDisponivel(false);
+					//o usuario nao vai poder alugar nenhum item desse tipo
+					alugando.setPossuiTextoAlugado(true);
+					//verificador de que conseguiu alugar a apostila
+					verificador = true;
+					//seta o dia que o usuario alugou o texto
+					textos.get(i).diaAlugado();
+					//adiciona o livro para o metodo que ira manipular as funcoes de texto, como data de aluguel e de devolucao
+					alugando.textoAlugado(textos.get(i));
+					//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
+					alugando = null; //Limpa o alugando para evitar fraudes
+					return verificador;
+				}
 			}
 		}
 		return verificador;
@@ -373,6 +379,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 
 	//Devolucao de um livro
 	public boolean devolver(){
+		
 		return true;
 	}
 }
