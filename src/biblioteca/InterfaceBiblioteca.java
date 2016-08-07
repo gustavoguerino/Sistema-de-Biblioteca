@@ -24,10 +24,14 @@ public interface InterfaceBiblioteca {
 	void listarLivros();
 	void listarTextos();
 	void listarApostilas();
+        void listarUsuarios();
 	int pesquisarAcervo(int item, String elemento);
 	int devolver(int opcao);
 	boolean alugarLivro(String itemproc);
 	boolean alugarApostila(String itemproc);
 	boolean alugarTexto(String itemproc);
         boolean podeAlugar(String usuario);
+        boolean setAdmin(String usuario, boolean status);
+        boolean isAdminLogado();
+       
 } 

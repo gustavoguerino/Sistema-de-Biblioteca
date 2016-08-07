@@ -10,7 +10,7 @@ public class Usuario implements InterfaceUsuario{
     //======================================================================================================
     private int codUsuario;
     private String nome, endereco, cpf, usuario, senha;
-    private boolean possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado;
+    private boolean possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado, admin;
     private Apostila apostilaarm;
     private Livro livroarm;
     private Texto textoarm;
@@ -24,6 +24,13 @@ public class Usuario implements InterfaceUsuario{
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
+        public boolean isAdmin() {
+            return admin;
+        }
+
+        public void setAdmin(boolean admin) {
+            this.admin = admin;
+        }
 	public String getSenha() {
 		return senha;
 	}
@@ -71,7 +78,7 @@ public class Usuario implements InterfaceUsuario{
 	}//possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado;
 	
 	public Usuario(){
-		
+		admin = false;
     }
     //metodos para armazenar o item q o usuario alugou.
 	public void apostilaAlugada(Apostila apostila){

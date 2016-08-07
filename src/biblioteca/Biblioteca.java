@@ -162,6 +162,19 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return confirm;
 	}
+        public boolean setAdmin(String usuario, boolean status){
+            boolean confirm = false;
+		for(int i = 0; i<users.size(); i++){
+			if(usuario.equals(users.get(i).getUsuario())){
+				users.get(i).setAdmin(status);
+                                confirm = true;
+			}
+		}
+		return confirm;
+        }
+        public boolean isAdminLogado(){
+            return logado.isAdmin();
+        }
         public int listarAtrasados() {
 		int itens = 0;
 		for(int i = 0; i<users.size(); i++){
@@ -214,13 +227,20 @@ public class Biblioteca implements InterfaceBiblioteca {
 			System.out.println("Disponivel: " + textos.get(i).isDisponivel());;
 		}
 	}
+        public void listarUsuarios(){
+            for(int i = 0; i<users.size(); i++){
+                System.out.println("\nNome: " + users.get(i).getNome()
+                        + "\nUsuario: " + users.get(i).getUsuario()
+                        + "\nEndereço: " + users.get(i).getEndereco());
+            }
+        }
 	//M�todos para pesquisar um item no acervo, o usu�rio bota a op��o e o nome que ele procura
 	//o sistema ir� verificar se tem algum autor ou titulo do livro com o nome procurado..
 	public int pesquisarAcervo(int item, String elemento){
 		int achou = 0;
 		if(item == 1){
 			for(int i = 0; i<livros.size();i++){
-				if((livros.get(i).getAutor().equals(elemento)) || (livros.get(i).getTitulo().equals(elemento))){
+				if((livros.get(i).getAutor().equalsIgnoreCase(elemento)) || (livros.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					System.out.println("Titulo: " + livros.get(i).getTitulo());
 					System.out.println("Autor: " + livros.get(i).getAutor());
 					System.out.println("Disponivel: " + livros.get(i).isDisponivel());
@@ -230,7 +250,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		if(item == 2){
 			for(int i = 0; i<apostilas.size();i++){
-				if((apostilas.get(i).getAutor().equals(elemento)) || (apostilas.get(i).getTitulo().equals(elemento))){
+				if((apostilas.get(i).getAutor().equalsIgnoreCase(elemento)) || (apostilas.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					System.out.println("Titulo: " + apostilas.get(i).getTitulo());
 					System.out.println("Autor: " + apostilas.get(i).getAutor());
 					System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
@@ -240,7 +260,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		if(item == 3){
 			for(int i = 0; i<textos.size();i++){
-				if((textos.get(i).getAutor().equals(elemento)) || (textos.get(i).getTitulo().equals(elemento))){
+				if((textos.get(i).getAutor().equalsIgnoreCase(elemento)) || (textos.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					System.out.println("Titulo: " + textos.get(i).getTitulo());
 					System.out.println("Autor: " + textos.get(i).getAutor());
 					System.out.println("Disponivel: " + textos.get(i).isDisponivel());
@@ -254,7 +274,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		int achou = 0;
 		if(item == 1){
 			for(int i = 0; i<livros.size();i++){
-				if((livros.get(i).getTitulo().equals(elemento))){
+				if((livros.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					System.out.println("Titulo: " + livros.get(i).getTitulo());
 					System.out.println("Autor: " + livros.get(i).getAutor());
 					System.out.println("Disponivel: " + livros.get(i).isDisponivel());
@@ -264,7 +284,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		if(item == 2){
 			for(int i = 0; i<apostilas.size();i++){
-				if((apostilas.get(i).getTitulo().equals(elemento))){
+				if((apostilas.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					System.out.println("Titulo: " + apostilas.get(i).getTitulo());
 					System.out.println("Autor: " + apostilas.get(i).getAutor());
 					System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
@@ -274,7 +294,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		if(item == 3){
 			for(int i = 0; i<textos.size();i++){
-				if((textos.get(i).getTitulo().equals(elemento))){
+				if((textos.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					System.out.println("Titulo: " + textos.get(i).getTitulo());
 					System.out.println("Autor: " + textos.get(i).getAutor());
 					System.out.println("Disponivel: " + textos.get(i).isDisponivel());

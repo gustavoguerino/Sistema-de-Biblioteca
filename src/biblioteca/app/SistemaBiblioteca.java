@@ -16,6 +16,7 @@ import biblioteca.*;
             pararloop = false;
             estadomenu = 1;
             biblio.cadastrarUsuario("Gustavo Guerino", "Rua Logo Ali", "34348227802", "teste", "123456");
+            biblio.setAdmin("teste", true);
             biblio.cadastrarLivro("Um dia que foi noite", "Carinha da Esquina", "123456-12", 1);
             biblio.cadastrarLivro("Um dia que foi noite 2", "Carinha da Esquina", "123456-13", 2);
             biblio.cadastrarLivro("Um dia que foi noite 3", "Carinha da Esquina", "123456-14", 3);
@@ -43,96 +44,151 @@ import biblioteca.*;
                 }
                 while(estadomenu == 2){
                     pularlinhas(100);
-                    System.out.println("SGB  -  Menu Principal"
-                            + "\n\nListagens:"
-                            + "\n1 - Livros"//
-                            + "\n2 - Apostilas"//
-                            + "\n3 - Textos"//
-                            + "\n4 - Usuarios"//
-                            + "\n\nCadastros:"
-                            + "\n5 - Livros"//
-                            + "\n6 - Apostilas"//
-                            + "\n7 - Textos"//
-                            + "\n8 - Usuarios"//
-                            + "\n\nFunções Basicas:"
-                            + "\n9 - Alugar Item"
-                            + "\n10 - Devolução de Item"
-                            + "\n11 - Buscar Item"
-                            + "\n12 - Remoção de Item"
-                            + "\n13 - Ver devoluções atrasadss"
-                            + "\n\nFunções:"
-                            + "\nE - Encerrar programa"
-                            + "\nT - Trocar de Usuario");
-                    strread = read.nextLine();
-                    pularlinhas(100);
-                    switch (strread) {
-                        case "T":
-                        case "t":
-                            estadomenu = 1;
-                            break;
-                        case "E":
-                        case "e":
-                            pararloop = true;
-                            break;
-                        case "1":
-                            System.out.println("SGB - Listando Itens");
-                            biblio.listarLivros();
-                            break;
-                        case "2":
-                            System.out.println("SGB - Listando Itens");
-                            biblio.listarApostilas();
-                            break;
-                        case "3":
-                            System.out.println("SGB - Listando Itens");
-                            biblio.listarTextos();
-                            break;
-                        case "4":
-                            System.out.println("SGB - Listando Usuarios");
-                            //Listar os usuarios
-                            break;
-                        case "5":
-                            cadastrar(1);
-                            pularlinhas(100);
-                            System.out.println("\n\nProcesso de cadastro concluido.");
-                            break;
-                        case "6":
-                            cadastrar(2);
-                            pularlinhas(100);
-                            System.out.println("\n\nProcesso de cadastro concluido.");
-                            break;
-                        case "7":
-                            cadastrar(3);
-                            pularlinhas(100);
-                            System.out.println("\n\nProcesso de cadastro concluido.");
-                            break;
-                        case "8":
-                            cadastrar(4);
-                            pularlinhas(100);
-                            System.out.println("\n\nProcesso de cadastro concluido.");
-                            break;
-                        case "9":
-                            alugar();
-                            pularlinhas(100);
-                            System.out.println("\n\nAlugar concluido.");
-                            break;
-                        case "10":
-                            devolver();
-                            break;
-                        case "11":
-                            buscar();
-                            pularlinhas(100);
-                            System.out.println("\n\nBusca concluida.");
-                            break;
-                        case "12":
-                            deletar();
-                            break;
-                        case "13":
-                            System.out.println("SGB - Listando itens Atrasados");
-                            if(biblio.listarAtrasados() == 0)
-                            {
-                                 System.out.println("\n\nNenhum item atrasado!");
-                            }
-                            break;
+                    if(biblio.isAdminLogado()){
+                        System.out.println("SGB  -  Menu Administrativo"
+                                + "\n\nListagens:"
+                                + "\n1 - Livros"//
+                                + "\n2 - Apostilas"//
+                                + "\n3 - Textos"//
+                                + "\n4 - Usuarios"//
+                                + "\n\nCadastros:"
+                                + "\n5 - Livros"//
+                                + "\n6 - Apostilas"//
+                                + "\n7 - Textos"//
+                                + "\n8 - Usuarios"//
+                                + "\n\nFunções Basicas:"
+                                + "\n9 - Alugar Item"
+                                + "\n10 - Devolução de Item"
+                                + "\n11 - Buscar Item"
+                                + "\n12 - Remoção de Item"
+                                + "\n13 - Ver devoluções atrasadss"
+                                + "\n\nFunções:"
+                                + "\nE - Encerrar programa"
+                                + "\nT - Trocar de Usuario"
+                                + "\nD - Conceder acesso administrativo"
+                                + "\nR - Remover acesso administrativo");
+                        strread = read.nextLine();
+                        pularlinhas(100);
+                        switch (strread) {
+                            case "T":
+                            case "t":
+                                estadomenu = 1;
+                                break;
+                            case "E":
+                            case "e":
+                                pararloop = true;
+                                break;
+                            case "D":
+                            case "d":
+                                System.out.println("\nDigite o usuario que ira receber acesso de administrador:\n");
+                                strread = read.nextLine();
+                                if(biblio.setAdmin(strread, true)){
+                                    System.out.println("Adicionado com sucesso.\n");
+                                }
+                                else{
+                                    System.out.println("Usuario não encontrado.\n");
+                                }
+                                break;
+                            case "R":
+                            case "r":
+                                System.out.println("\nDigite o usuario que ira remover acesso de administrador:\n");
+                                strread = read.nextLine();
+                                if(biblio.setAdmin(strread, false)){
+                                    System.out.println("Removido com sucesso.\n");
+                                }
+                                else{
+                                    System.out.println("Usuario não encontrado.\n");
+                                }
+                                break;
+                            case "1":
+                                System.out.println("SGB - Listando Itens");
+                                biblio.listarLivros();
+                                break;
+                            case "2":
+                                System.out.println("SGB - Listando Itens");
+                                biblio.listarApostilas();
+                                break;
+                            case "3":
+                                System.out.println("SGB - Listando Itens");
+                                biblio.listarTextos();
+                                break;
+                            case "4":
+                                System.out.println("SGB - Listando Usuarios");
+                                biblio.listarUsuarios();
+                                break;
+                            case "5":
+                                cadastrar(1);
+                                pularlinhas(100);
+                                System.out.println("\n\nProcesso de cadastro concluido.");
+                                break;
+                            case "6":
+                                cadastrar(2);
+                                pularlinhas(100);
+                                System.out.println("\n\nProcesso de cadastro concluido.");
+                                break;
+                            case "7":
+                                cadastrar(3);
+                                pularlinhas(100);
+                                System.out.println("\n\nProcesso de cadastro concluido.");
+                                break;
+                            case "8":
+                                cadastrar(4);
+                                pularlinhas(100);
+                                System.out.println("\n\nProcesso de cadastro concluido.");
+                                break;
+                            case "9":
+                                alugar();
+                                pularlinhas(100);
+                                System.out.println("\n\nAlugar concluido.");
+                                break;
+                            case "10":
+                                devolver();
+                                break;
+                            case "11":
+                                buscar();
+                                pularlinhas(100);
+                                System.out.println("\n\nBusca concluida.");
+                                break;
+                            case "12":
+                                deletar();
+                                break;
+                            case "13":
+                                System.out.println("SGB - Listando itens Atrasados");
+                                if(biblio.listarAtrasados() == 0)
+                                {
+                                     System.out.println("\n\nNenhum item atrasado!");
+                                }
+                                break;
+                        }
+                    }
+                    else{
+                       System.out.println("SGB  -  Menu Basico"
+                                + "\n\nListagens:"
+                                + "\n1 - Livros"
+                                + "\n2 - Apostilas"
+                                + "\n3 - Textos"
+                                + "\n\n4 - Realizar uma busca"); 
+                        strread = read.nextLine();
+                        pularlinhas(100);
+                        switch (strread) {
+                            case "1":
+                                System.out.println("SGB - Listando Livros");
+                                biblio.listarLivros();
+                                break;
+                            case "2":
+                                System.out.println("SGB - Listando Apostilas");
+                                biblio.listarApostilas();
+                                break;
+                            case "3":
+                                System.out.println("SGB - Listando Textos");
+                                biblio.listarTextos();
+                                break;
+                            case "4":
+                                buscar();
+                                pularlinhas(100);
+                                System.out.println("\n\nBusca concluida.");
+                                break;
+                        }
                     }
                     System.out.println("\n\nDigite algo para voltar ao menu.");
                     read.nextLine();
