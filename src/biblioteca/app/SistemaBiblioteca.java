@@ -139,7 +139,7 @@ import biblioteca.*;
                             case "9":
                                 alugar();
                                 pularlinhas(100);
-                                System.out.println("\n\nAlugar concluido.");
+                                System.out.println("\n\nProcesso concluido.");
                                 break;
                             case "10":
                                 devolver();
@@ -190,7 +190,7 @@ import biblioteca.*;
                                 break;
                         }
                     }
-                    System.out.println("\n\nDigite algo para voltar ao menu.");
+                    System.out.println("\n\nPrecione enter para voltar ao menu.");
                     read.nextLine();
                     
                 }
@@ -310,7 +310,7 @@ import biblioteca.*;
                     System.out.println("\nNenhum texto encontrado\n");
                 }
  
-                System.out.println("\n\nDigite algo para voltar ao menu.");
+                System.out.println("\n\nPrecione enter para voltar ao menu.");
                 read.nextLine();        
         }
         private static void deletar(){
@@ -532,13 +532,13 @@ import biblioteca.*;
                 case 1:
                     while (concluido == false){
                         //biblio.cadastrarLivro(autor, autor, isbn, edicao);
-                        System.out.println("\nQual o titulo:");
+                        System.out.println("\nQual o titulo: (4+ caracteres)");
                         strread = read.nextLine();
-                        System.out.println("\nQuem escreveu:");
+                        System.out.println("\nQuem escreveu: (4+ caracteres)");
                         strread2 = read.nextLine();
-                        System.out.println("\nQual o ISBN:");
+                        System.out.println("\nQual o ISBN: (13 caracteres)");
                         strread3 = read.nextLine();
-                        System.out.println("\nQual a edição:");
+                        System.out.println("\nQual a edição: (1+ caracteres)");
                         strread4 = read.nextLine();
                        if(strread.length() < 5){        
                             pularlinhas(100);
@@ -573,9 +573,9 @@ import biblioteca.*;
                 case 2:
                     while (concluido == false){
                         //biblio.cadastrarApostila(titulo, autor);
-                        System.out.println("\nQual o titulo:");
+                        System.out.println("\nQual o titulo: (4+ caracteres)");
                         strread = read.nextLine();
-                        System.out.println("\nQuem escreveu:");
+                        System.out.println("\nQuem escreveu: (4+ caracteres)");
                         strread2 = read.nextLine();
                         if(strread.length() < 5){        
                             pularlinhas(100);
@@ -599,9 +599,9 @@ import biblioteca.*;
                 case 3:
                     while (concluido == false){
                         //biblio.cadastrarTexto(strread, strread);
-                        System.out.println("\nQual o titulo:");
+                        System.out.println("\nQual o titulo: (4+ caracteres)");
                         strread = read.nextLine();
-                        System.out.println("\nQuem escreveu:");
+                        System.out.println("\nQuem escreveu: (4+ caracteres)");
                         strread2 = read.nextLine();
                         if(strread.length() < 5){        
                             pularlinhas(100);
@@ -625,15 +625,15 @@ import biblioteca.*;
                 case 4:
                     while (concluido == false){
                         //biblio.cadastrarUsuario(nome, endereço, cpf, login, senha);
-                        System.out.println("\nNome completo do usuario:");
+                        System.out.println("\nNome completo do usuario: (10+ caracteres)");
                         strread = read.nextLine();
-                        System.out.println("\nEndereço completo:");
+                        System.out.println("\nEndereço completo: (10+ caracteres)");
                         strread2 = read.nextLine();
-                        System.out.println("\nCPF:");
+                        System.out.println("\nCPF: (11 caracteres)");
                         strread3 = read.nextLine();
-                        System.out.println("\nLogin:");
+                        System.out.println("\nLogin: (6+ caracteres)");
                         strread4 = read.nextLine();
-                        System.out.println("\nSenha:");
+                        System.out.println("\nSenha: (6+ caracteres)");
                         strread5 = read.nextLine();
 
                         if(strread.length() < 10){        

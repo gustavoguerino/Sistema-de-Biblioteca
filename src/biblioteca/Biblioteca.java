@@ -308,7 +308,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		int achou = 0;
 		if(item == 1){
 			for(int i = 0; i<livros.size();i++){
-				if((livros.get(i).getTitulo().equals(elemento))){
+				if((livros.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					if(livros.get(i).isDisponivel() == true){
 						achou += 1; 
 					}
@@ -317,7 +317,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		if(item == 2){
 			for(int i = 0; i<apostilas.size();i++){
-				if((apostilas.get(i).getTitulo().equals(elemento))){
+				if((apostilas.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					if(apostilas.get(i).isDisponivel() == true){
 						achou += 1;
 					}
@@ -326,7 +326,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		if(item == 3){
 			for(int i = 0; i<textos.size();i++){
-				if((textos.get(i).getTitulo().equals(elemento))){
+				if((textos.get(i).getTitulo().equalsIgnoreCase(elemento))){
 					if(textos.get(i).isDisponivel() == true){
 						achou += 1;
 					}
@@ -339,15 +339,12 @@ public class Biblioteca implements InterfaceBiblioteca {
 	//Logica pai-mei da bahia de alugar um livro.. xD
 	public boolean alugarLivro(String itemproc){
 		boolean verificador = false;
-		System.out.println("ponto 5");
 		for(int i = 0; i<livros.size();i++){
-			System.out.println("ponto 6");
 			if(alugando == null){
 				System.out.println("Alugando = null");
 				return verificador;   
 			}
-			else if(((livros.get(i).getTitulo().equals(itemproc))) && (livros.get(i).isDisponivel() == true)){
-				System.out.println("ponto 2"); 
+			else if(((livros.get(i).getTitulo().equalsIgnoreCase(itemproc))) && (livros.get(i).isDisponivel() == true)){
 				if((alugando.isPossuiLivroAlugado()!=true)){
 					//o livro fica indisponivel
 					livros.get(i).setDisponivel(false);
@@ -361,7 +358,6 @@ public class Biblioteca implements InterfaceBiblioteca {
 					verificador = true;
 					//depois voce confirma se ele sai do loop apartir daqui, o break acho q nao da muito certo.
 					alugando = null; //Limpa o alugando para evitar fraudes
-					System.out.println("ponto 3");
 					return verificador;
 				}
 			}
@@ -375,7 +371,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 			if(alugando == null){
 				return verificador;
 			}
-			else if(((apostilas.get(i).getTitulo().equals(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
+			else if(((apostilas.get(i).getTitulo().equalsIgnoreCase(itemproc))) && (apostilas.get(i).isDisponivel() == true)){
 				if((alugando.isPossuiApostilaAlugada()!=true)){
 					//a apostila fica indisponivel
 					apostilas.get(i).setDisponivel(false);
@@ -403,7 +399,7 @@ public class Biblioteca implements InterfaceBiblioteca {
 			if(alugando == null){
 				return verificador;
 			}
-			else if(((textos.get(i).getTitulo().equals(itemproc))) && (textos.get(i).isDisponivel() == true)){
+			else if(((textos.get(i).getTitulo().equalsIgnoreCase(itemproc))) && (textos.get(i).isDisponivel() == true)){
 				if((alugando.isPossuiTextoAlugado()!=true)){
 					//o texto fica indisponivel para aluguel
 					textos.get(i).setDisponivel(false);
