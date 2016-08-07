@@ -34,12 +34,6 @@ public class Livro extends ItemAcervo {
 	public void setEdicao(int edicao) {
 		this.edicao = edicao;
 	}
-	public int getQuantidade() {
-		return quantidade;
-	}
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
 
 
 }

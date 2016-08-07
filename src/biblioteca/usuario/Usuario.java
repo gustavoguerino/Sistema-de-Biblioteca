@@ -1,6 +1,7 @@
 package biblioteca.usuario;
 
 import biblioteca.acervo.*;
+import java.time.LocalDate;
 
 public class Usuario implements InterfaceUsuario{
     //==============Gustavo=================================================================================
@@ -9,8 +10,10 @@ public class Usuario implements InterfaceUsuario{
     //======================================================================================================
     private int codUsuario;
     private String nome, endereco, cpf, usuario, senha;
-    private boolean possuiItemAlugado, possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado;
-    private ItemAcervo alugou;
+    private boolean possuiApostilaAlugada, possuiLivroAlugado, possuiTextoAlugado;
+    private Apostila apostilaarm;
+    private Livro livroarm;
+    private Texto textoarm;
     
     public int getCodUsuario() {
         return codUsuario;
@@ -26,12 +29,6 @@ public class Usuario implements InterfaceUsuario{
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-	public ItemAcervo getAlugou() {
-		return alugou;
-	}
-	public void setAlugou(ItemAcervo alugou) {
-		this.alugou = alugou;
 	}
 	public void setCodUsuario(int codUsuario) {
         this.codUsuario = codUsuario;
@@ -76,34 +73,52 @@ public class Usuario implements InterfaceUsuario{
 	public Usuario(){
 		
     }
-    public void pagar() {
-	//==========Gustavo=============================
-        // Verifica se o usuario alugou algo, e se alugou setPago para true no objeto.
-        // 
-        //=============================================
-	if((!alugou.estaPago()) && (alugou != null)){
-            alugou.setPago(true);
-        }
-    }
-    public boolean devendo(){
-        if((alugou != null)){
-            return alugou.estaPago();
-        }
-        else{
-            return false;
-        }
-    }
-    public void escolherItemAcervo(ItemAcervo itemEscolhido){
-           alugou = itemEscolhido;
-    }
-    
     //metodos para armazenar o item q o usuario alugou.
-	public void apostilaAlugada(Apostila apostila){}
-	public void textoAlugado(Texto texto){}
-	public void livroAlugado(Livro livro){}
+	public void apostilaAlugada(Apostila apostila){
+            apostilaarm = apostila;
+        }
 
-    @Override
-    public boolean temAtraso() {
+    public Apostila getApostilaarm() {
+        return apostilaarm;
+    }
+
+    public Livro getLivroarm() {
+        return livroarm;
+    }
+
+    public Texto getTextoarm() {
+        return textoarm;
+    }
+	public void textoAlugado(Texto texto){
+            textoarm = texto;
+        }
+	public void livroAlugado(Livro livro){
+            livroarm = livro;
+        }
+    //Opcao 1 = Livro, 2 = Texto, 3 = Apostila
+    //boolean temAtraso(int opcao)
+    public boolean temAtraso(int opcao) {
+        if(opcao == 1){
+            if(isPossuiLivroAlugado()){
+                if(!livroarm.dataEntrega(livroarm.diaDevolucao(), livroarm.diaAlugado())){
+                    return true;
+                }
+            }
+        }
+        if(opcao == 2){
+            if(isPossuiTextoAlugado()){
+                if(!textoarm.dataEntrega(textoarm.diaDevolucao(), textoarm.diaAlugado())){
+                    return true;
+                }
+            }
+        }
+        if(opcao == 3){
+            if(isPossuiApostilaAlugada()){
+                if(!apostilaarm.dataEntrega(apostilaarm.diaDevolucao(), apostilaarm.diaAlugado())){
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

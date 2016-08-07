@@ -13,22 +13,6 @@ public class ItemAcervo implements InterfaceItemAcervo {
 	private boolean pago = true;
 	private boolean disponivel = true;
 
-	public double getCusto() {
-		return custo;
-	}
-
-	public void setCusto(double custo) {
-		this.custo = custo;
-	}
-
-	public boolean isPago() {
-		return pago;
-	}
-
-	public void setPago(boolean pago) {
-		this.pago = pago;
-	}
-
 	public boolean isDisponivel() {
 		return disponivel;
 	}
@@ -39,10 +23,6 @@ public class ItemAcervo implements InterfaceItemAcervo {
 
 	//Construtor
 	public ItemAcervo(){}
-
-	public boolean estaPago(){
-		return pago;
-	}
 	
 	//Implementacao da logica de inserir uma data para alugar e devolver.
 	public LocalDate diaAlugado(){
@@ -55,7 +35,7 @@ public class ItemAcervo implements InterfaceItemAcervo {
 		return alugado;
 	}
 	
-	//logica para verificar se o usuario está devendo ou nao
+	//logica para verificar se o usuario estï¿½ devendo ou nao
 	public boolean dataEntrega(LocalDate diaDevolucao, LocalDate diaAlugado){
 		boolean noprazo = false;
 		Period data_entrega = Period.between(diaAlugado, diaDevolucao);

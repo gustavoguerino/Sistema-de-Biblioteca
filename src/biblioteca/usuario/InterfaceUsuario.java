@@ -12,9 +12,8 @@ import biblioteca.acervo.*;
  * @author gustavoguerino
  */
 public interface InterfaceUsuario {
-    void pagar();
-    void escolherItemAcervo(ItemAcervo itemEscolhido);
     void apostilaAlugada(Apostila apostila);
     void textoAlugado(Texto texto);
     void livroAlugado(Livro livro);
+    boolean temAtraso(int opcao);
 }

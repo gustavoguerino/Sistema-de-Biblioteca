@@ -162,29 +162,56 @@ public class Biblioteca implements InterfaceBiblioteca {
 		}
 		return confirm;
 	}
-
+        public int listarAtrasados() {
+		int itens = 0;
+		for(int i = 0; i<users.size(); i++){
+			//if((usuario.equals(users.get(i).getUsuario())) && (senha.equals(users.get(i).getSenha()))){
+                        if((users.get(i).temAtraso(1))){
+                            System.out.println("\n\nUsuario: " + users.get(i).getNome()
+                                    + "\nEndereço: " + users.get(i).getEndereco()
+                                    + "\nLivro em atraso: " + users.get(i).getLivroarm().getTitulo()
+                                    + "\nAutor: "  + users.get(i).getLivroarm().getAutor());
+                            itens += 1;
+                        }
+                        else if((users.get(i).temAtraso(2))){
+                            System.out.println("\n\nUsuario: " + users.get(i).getNome()
+                                    + "\nEndereço: " + users.get(i).getEndereco()
+                                    + "\nTexto em atraso: " + users.get(i).getLivroarm().getTitulo()
+                                    + "\nAutor: "  + users.get(i).getLivroarm().getAutor());
+                            itens += 1;
+                        }
+                        else if((users.get(i).temAtraso(3))){
+                            System.out.println("\n\nUsuario: " + users.get(i).getNome()
+                                    + "\nEndereço: " + users.get(i).getEndereco()
+                                    + "\nApostila em atraso: " + users.get(i).getLivroarm().getTitulo()
+                                    + "\nAutor: "  + users.get(i).getLivroarm().getAutor());
+                            itens += 1;
+                        }
+		}
+                return itens;
+	}
 	//Listar todos os Livros e o status.
 	public void listarLivros(){
 		for(int i = 0; i<livros.size();i++){
-			System.out.println(livros.get(i).getTitulo());
-			System.out.println(livros.get(i).isDisponivel());
-			System.out.println("---------------------------------------------");
+			System.out.println("\nTitulo: " + livros.get(i).getTitulo());
+                        System.out.println("Autor: " + livros.get(i).getAutor());
+			System.out.println("Disponivel: " + livros.get(i).isDisponivel());
 		}
 	}
 	//Listar todas as apostilas e o status
 	public void listarApostilas(){
 		for(int i = 0; i<apostilas.size(); i++){
-			System.out.println(apostilas.get(i).getTitulo());
-			System.out.println(apostilas.get(i).isDisponivel());
-			System.out.println("---------------------------------------------");
+			System.out.println("\nTitulo: " + apostilas.get(i).getTitulo());
+                        System.out.println("Autor: " + apostilas.get(i).getAutor());
+			System.out.println("Disponivel: " + apostilas.get(i).isDisponivel());
 		}
 	}
 	//Listar todos os textos e o status
 	public void listarTextos(){
 		for(int i = 0; i<textos.size(); i++){
-			System.out.println(textos.get(i).getAutor());
-			System.out.println(textos.get(i).isDisponivel());
-			System.out.println("---------------------------------------------");
+			System.out.println("\nTitulo: " + textos.get(i).getAutor());
+                        System.out.println("Autor: " + textos.get(i).getAutor());
+			System.out.println("Disponivel: " + textos.get(i).isDisponivel());;
 		}
 	}
 	//M�todos para pesquisar um item no acervo, o usu�rio bota a op��o e o nome que ele procura
@@ -377,14 +404,121 @@ public class Biblioteca implements InterfaceBiblioteca {
 		return verificador;
 	}
 
-	//Devolucao de um livro
-	public boolean devolver(){
-		
-		return true;
+	//Metodo de devolução, chama devolver(0); para listar os livros se existir, retorna a quantidade de item
+        //depois basta passar devolver(opção), deve se autenticar o usuario que esta devolvendo antes de usar.
+        //Sem autenticação retorna -1
+        
+        //Metodo de verificação de atrasos
+        //Opcao 1 = Livro, 2 = Texto, 3 = Apostila
+        //boolean temAtraso(int opcao)
+	public int devolver(int opcao){
+            int retorno = 0, contador = 1;
+		if(alugando == null)
+                    return -1;
+                else{
+                    if(opcao == 0){
+                        if(alugando.isPossuiTextoAlugado()){
+                            System.out.println(contador++ + " " + alugando.getTextoarm().getTitulo() + " - " 
+                                    + alugando.getTextoarm().getAutor());
+                            if(alugando.temAtraso(2)){
+                                System.out.println("Passou do prazo de 15 dias para devolução. (COBRAR)\n");
+                            }
+                            else{
+                                System.out.println("\n");
+                            }
+                            retorno += 1;
+                        }
+                        if(alugando.isPossuiLivroAlugado()){
+                            System.out.println(contador++ + " " + alugando.getLivroarm().getTitulo() + " - " 
+                                    + alugando.getLivroarm().getAutor());
+                            if(alugando.temAtraso(1)){
+                                System.out.println("Passou do prazo de 15 dias para devolução. (COBRAR)\n");
+                            }
+                            else{
+                                System.out.println("\n");
+                            }
+                            retorno += 1;
+                        }
+                        if(alugando.isPossuiApostilaAlugada()){
+                            System.out.println(contador++ + " " + alugando.getApostilaarm().getTitulo() + " - " 
+                                    + alugando.getApostilaarm().getAutor());
+                            if(alugando.temAtraso(3)){
+                                System.out.println("Passou do prazo de 15 dias para devolução. (COBRAR)\n");
+                            }
+                            else{
+                                System.out.println("\n");
+                            }
+                            retorno += 1;
+                        }
+                    }
+                    else if(opcao == 1){
+                        if(alugando.isPossuiTextoAlugado()){
+                            alugando.getTextoarm().setDisponivel(true);
+                            alugando.setPossuiTextoAlugado(false);
+                            return 1;
+                        }
+                        else if(alugando.isPossuiLivroAlugado()){
+                            alugando.getLivroarm().setDisponivel(true);
+                            alugando.setPossuiLivroAlugado(false);
+                            return 1;
+                        }
+                        else if(alugando.isPossuiApostilaAlugada()){
+                            alugando.getApostilaarm().setDisponivel(true);
+                            alugando.setPossuiApostilaAlugada(false);
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                    else if(opcao == 2){
+                        int itemadevolver = 0;
+                        if(alugando.isPossuiTextoAlugado()){
+                            itemadevolver += 1;
+                            return 1;
+                        }
+                        if((itemadevolver == 0) && (alugando.isPossuiLivroAlugado())){
+                            alugando.getLivroarm().setDisponivel(true);
+                            alugando.setPossuiLivroAlugado(false);
+                            return 1;
+                        }
+                        else if(alugando.isPossuiApostilaAlugada()){
+                            alugando.getApostilaarm().setDisponivel(true);
+                            alugando.setPossuiApostilaAlugada(false);
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                    else if(opcao == 3){
+                        if(alugando.isPossuiApostilaAlugada()){
+                            alugando.getApostilaarm().setDisponivel(true);
+                            alugando.setPossuiApostilaAlugada(false);
+                            return 1;
+                        }
+                        else {
+                            return 0;
+                        }
+                    }
+                }
+		return retorno;
 	}
-
-    @Override
     public boolean podeAlugar(String usuario) {
-        return false;
+        for(int i = 0; i<users.size(); i++){
+            if(usuario.equals(users.get(i).getUsuario())){
+                if(users.get(i).temAtraso(1)){
+                    return false;
+                }
+                else if(users.get(i).temAtraso(2)){
+                    return false;
+                }
+                else if(users.get(i).temAtraso(3)){
+                    return false;
+                }
+		break;
+            }
+        }
+        return true;
     }
 }

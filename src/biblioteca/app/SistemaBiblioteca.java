@@ -56,8 +56,10 @@ import biblioteca.*;
                             + "\n8 - Usuarios"//
                             + "\n\nFunções Basicas:"
                             + "\n9 - Alugar Item"
-                            + "\n10 - Pagar Emprestimo"
+                            + "\n10 - Devolução de Item"
                             + "\n11 - Buscar Item"
+                            + "\n12 - Remoção de Item"
+                            + "\n13 - Ver devoluções atrasadss"
                             + "\n\nFunções:"
                             + "\nE - Encerrar programa"
                             + "\nT - Trocar de Usuario");
@@ -113,10 +115,23 @@ import biblioteca.*;
                             pularlinhas(100);
                             System.out.println("\n\nAlugar concluido.");
                             break;
+                        case "10":
+                            devolver();
+                            break;
                         case "11":
                             buscar();
                             pularlinhas(100);
                             System.out.println("\n\nBusca concluida.");
+                            break;
+                        case "12":
+                            deletar();
+                            break;
+                        case "13":
+                            System.out.println("SGB - Listando itens Atrasados");
+                            if(biblio.listarAtrasados() == 0)
+                            {
+                                 System.out.println("\n\nNenhum item atrasado!");
+                            }
                             break;
                     }
                     System.out.println("\n\nDigite algo para voltar ao menu.");
@@ -125,6 +140,98 @@ import biblioteca.*;
                 }
                                
             }
+        }
+        private static void devolver(){
+            //Metodo de devolução, chama devolver(0); para listar os livros se existir, retorna a quantidade de item
+            //depois basta passar devolver(opção), deve se autenticar o usuario que esta devolvendo antes de usar.
+            //Sem autenticação retorna -1
+            //public int devolver(int opcao)
+            pularlinhas(100);
+            int etapa = 0;
+            boolean continuardevolucao = true;
+            while(continuardevolucao == true){
+                    if(etapa == 0){
+                        System.out.println("Prossiga com a autenticação do usuario que vai devolver o item:"
+                                + "\n\n Digite o Login que deseja alugar este livro:\n");
+                        strread3 = read.nextLine();
+                        if(biblio.usuarioExiste(strread3)){ 
+                            etapa = 1;
+                        }
+                        else
+                        {
+                            while(!biblio.usuarioExiste(strread3) || (continuardevolucao == true)){
+                                pularlinhas(100);
+                                System.out.println("Usuario não existe, tente novamente: (0 para desistir)");
+                                strread3 = read.nextLine();
+                                etapa = 1;
+                                if(strread3.equals("0")){
+                                    continuardevolucao = false;
+                                    etapa = 0;
+                                }
+                            }
+                        }
+                    }
+                    else if(etapa == 1){
+                        pularlinhas(100);
+                        System.out.println("Digite a senha:");
+                        strread4 = read.nextLine();
+                        if(biblio.autenticarAlugar(strread3,strread4)){
+                            etapa = 2;
+                        }
+                        else
+                        {
+                            while(!biblio.autenticarAlugar(strread3,strread4) || (continuardevolucao == true)){
+                                pularlinhas(100);
+                                System.out.println("Senha não confere, tente novamente: (0 para desistir)");
+                                strread4 = read.nextLine();
+                                etapa = 2;
+                                if(strread4.equals("0")){
+                                    continuardevolucao = false;
+                                    etapa = 1;
+                                }
+                            }
+                        }
+                    }else if(etapa == 2){
+                        pularlinhas(100);
+                        int status;
+                        int itens = biblio.devolver(0);
+                        if(itens == 0){
+                            pularlinhas(100);
+                            System.out.println("Usuario não possui itens alugados.\nAperte enter para sair.");
+                        }
+                        else if(itens > 0){
+                            pularlinhas(100);
+                            System.out.println("\n\nSelecione um dos itens de acordo com seu numero\n ou digite outro valor para sair.");
+                            strread = read.nextLine();
+                            if(strread.equals("1")){
+                                if(biblio.devolver(1) == 1){
+                                    pularlinhas(100);
+                                    System.out.println("Devolvido com sucesso.\nAperte enter para sair.");
+                                }
+                            }
+                            else if(strread.equals("2")){
+                                if(biblio.devolver(2) == 1){
+                                    pularlinhas(100);
+                                    System.out.println("Devolvido com sucesso.\nAperte enter para sair.");
+                                }
+                            }
+                            else if(strread.equals("3")){
+                                if(biblio.devolver(3) == 1){
+                                    pularlinhas(100);
+                                    System.out.println("Devolvido com sucesso.\nAperte enter para sair.");
+                                }
+                            }
+                            
+                        }
+                        else{
+                            pularlinhas(100);
+                            System.out.println("Encontramos um erro, tente novamente.\nAperte enter para sair.");
+                        }
+                        continuardevolucao = false;
+                        read.nextLine();
+                    }
+            }
+            
         }
         private static void buscar(){
                 pularlinhas(100);
@@ -150,13 +257,85 @@ import biblioteca.*;
                 System.out.println("\n\nDigite algo para voltar ao menu.");
                 read.nextLine();        
         }
+        private static void deletar(){
+            boolean parar = false;
+            int tipoescolhido = 0;
+            String textodoalugar;
+            while (parar == false){
+                pularlinhas(100);
+                System.out.println("\nDigite o titulo do item:");
+                textodoalugar = read.nextLine();
+                pularlinhas(100);
+                System.out.println("Livros:\n");
+                int itensLivro = biblio.pesquisarAluguel(1, textodoalugar);
+                if(itensLivro == 0){       
+                    System.out.println("\nNenhum livro encontrado\n");
+                }else{
+                    if(biblio.disponivelAlugar(1,textodoalugar) > 0){
+                        System.out.println("\n\nPara deletar o livro, digite: 1");
+                    }
+                    else{
+                       System.out.println("\n\nLivros alugados não podem ser deletados");
+                    }
+                }
+                System.out.println("\nApostilas:\n");
+                int itensApostila = biblio.pesquisarAluguel(2, textodoalugar);
+                if(itensApostila == 0){       
+                    System.out.println("\nNenhuma apostila encontrada\n");
+                }else{
+                    if(biblio.disponivelAlugar(2,textodoalugar) > 0){
+                        System.out.println("\n\nPara deletar a apostila, digite: 2");
+                    }
+                    else{
+                       System.out.println("\n\nApostilas alugadas não podem ser deletadas");
+                    }
+                }
+                System.out.println("\nTextos:\n");
+                int itensTexto = biblio.pesquisarAluguel(3, textodoalugar);
+                if(itensTexto == 0){       
+                    System.out.println("\nNenhum texto encontrado\n");
+                }else{
+                    if(biblio.disponivelAlugar(3,textodoalugar) > 0){
+                        System.out.println("\n\nPara deletar o texto, digite: 3");
+                    }
+                    else{
+                       System.out.println("\n\nTextos alugados não podem ser deletados");
+                    }
+                }
+                //Metodo de verificação de atrasos
+                //Opcao 1 = Livro, 2 = Texto, 3 = Apostila
+                //boolean temAtraso(int opcao)
+                System.out.println("\nDigite 0 para buscar novamente, ou S para sair");
+                strread2 = read.nextLine();         
+                if((biblio.disponivelAlugar(3, textodoalugar) > 0) && (strread2.equals("3"))){  //Se estiver disponivel, e o cara escolheu a opção 3
+                    biblio.removerTexto(textodoalugar);  
+                    System.out.println("\nRemovido com sucesso!");                  //Cai no loop de alugar e ativa o parar pra quando sair da parte do aluguel, retornar ao menu
+                    parar = true;
+                }      
+                else if((biblio.disponivelAlugar(2, textodoalugar) > 0) && (strread2.equals("2"))){
+                    biblio.removerApostila(textodoalugar);  
+                    System.out.println("\nRemovido com sucesso!");
+                    parar = true;
+                }      
+                else if((biblio.disponivelAlugar(1, textodoalugar) > 0) && (strread2.equals("1"))){
+                    biblio.removerLivro(textodoalugar);  
+                    System.out.println("\nRemovido com sucesso!");
+                    parar = true;
+                }      
+                else if(strread2.equals("s") || strread2.equals("S")){
+                    parar = true;
+                }   
+            }
+            read.nextLine();
+        }
+    
         private static void alugar(){
             boolean parar = false, continuaralugar = false;
             int tipoescolhido = 0;
             String textodoalugar;
             while (parar == false){
                 pularlinhas(100);
-                System.out.println("\nDigite o titulo do livro:");
+                System.out.println("\nDigite o titulo do item:");
                 textodoalugar = read.nextLine();
                 pularlinhas(100);
                 System.out.println("Livros:\n");
