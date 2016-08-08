@@ -167,7 +167,8 @@ import biblioteca.*;
                                 + "\n1 - Livros"
                                 + "\n2 - Apostilas"
                                 + "\n3 - Textos"
-                                + "\n\n4 - Realizar uma busca"); 
+                                + "\n\n4 - Realizar uma busca"
+                               + "\n\nT - Trocar de usuario"); 
                         strread = read.nextLine();
                         pularlinhas(100);
                         switch (strread) {
@@ -187,6 +188,10 @@ import biblioteca.*;
                                 buscar();
                                 pularlinhas(100);
                                 System.out.println("\n\nBusca concluida.");
+                                break;
+                            case "T":
+                            case "t":
+                                estadomenu = 1;
                                 break;
                         }
                     }
