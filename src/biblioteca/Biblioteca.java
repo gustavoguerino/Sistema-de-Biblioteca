@@ -13,6 +13,7 @@ import biblioteca.acervo.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
+
 /**
  *
  * @author maurodecarvalho
@@ -46,7 +47,50 @@ public class Biblioteca implements InterfaceBiblioteca {
 
 	//Metodo para cadastrar de usuario
 	public void cadastrarUsuario(String nomeUser,String endUser, String cpfUser, String loginUser, String senhaUser){
-		Usuario user = new Usuario();
+		if(cpfUser.length() == 11){
+                    int     d1, d2;
+                    int     digito1, digito2, resto;
+                    int     digitoCPF;
+                    String  nDigResult;
+
+                    d1 = d2 = 0;
+                    digito1 = digito2 = resto = 0;
+
+                    for (int nCount = 1; nCount < cpfUser.length() -1; nCount++)
+                    {
+                       digitoCPF = Integer.valueOf (cpfUser.substring(nCount -1, nCount)).intValue();
+                       d1 = d1 + ( 11 - nCount ) * digitoCPF;
+                       d2 = d2 + ( 12 - nCount ) * digitoCPF;
+                    };
+                    resto = (d1 % 11);
+                    if (resto < 2)
+                       digito1 = 0;
+                    else
+                       digito1 = 11 - resto;
+
+                    d2 += 2 * digito1;
+                    resto = (d2 % 11);
+                    if (resto < 2)
+                       digito2 = 0;
+                    else
+                       digito2 = 11 - resto;
+                    String nDigVerific = cpfUser.substring (cpfUser.length()-2, cpfUser.length());
+                    nDigResult = String.valueOf(digito1) + String.valueOf(digito2);
+                    if(!nDigVerific.equals(nDigResult)){
+                        throw new biblioteca.exceptions.CPFInvalidoException(cpfUser);
+                    }
+   
+                }
+                else{
+                    throw new biblioteca.exceptions.CPFInvalidoException(cpfUser);
+                }
+                for(int i = 0; i<users.size(); i++){
+                    if(loginUser.equals(users.get(i).getUsuario())){
+                        throw new biblioteca.exceptions.LoginRepetidoException(cpfUser);        
+                    }
+                }
+                    
+                Usuario user = new Usuario();
 		user.setNome(nomeUser);
 		user.setEndereco(endUser);
 		user.setCpf(cpfUser);
@@ -55,10 +99,30 @@ public class Biblioteca implements InterfaceBiblioteca {
 		users.add(user);
 
 	}
-
 	//Metodo para o cadastro de Livro
-	public void cadastrarLivro(String newTitulo, String newAutor, String newIsbn, int newEdicao){
-
+	public void cadastrarLivro(String newTitulo, String newAutor, String newIsbn, int newEdicao) {
+                    newIsbn = newIsbn.replaceAll( "-", "" );
+                    if ( newIsbn.length() != 13 ){
+                        throw new biblioteca.exceptions.ISBNInvalidoException(newIsbn);
+                    }
+                    try{
+                        int tot = 0;
+                        for ( int i = 0; i < 12; i++ ){
+                            int digit = Integer.parseInt( newIsbn.substring( i, i + 1 ) );
+                            tot += (i % 2 == 0) ? digit * 1 : digit * 3;
+                        }
+                        int verificador = 10 - (tot % 10);
+                        if ( verificador == 10 ){
+                            verificador = 0;
+                        }
+                        if((verificador != Integer.parseInt( newIsbn.substring(12) ))){
+                           throw new biblioteca.exceptions.ISBNInvalidoException(newIsbn); 
+                        }
+                    }
+                    catch ( NumberFormatException nfe ){
+                        throw new biblioteca.exceptions.ISBNInvalidoException(newIsbn);
+                    }
+            
 		Livro livro = new Livro();
 		livro.setTitulo(newTitulo);
 		livro.setAutor(newAutor);

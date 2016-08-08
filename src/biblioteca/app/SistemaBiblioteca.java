@@ -17,9 +17,9 @@ import biblioteca.*;
             estadomenu = 1;
             biblio.cadastrarUsuario("Gustavo Guerino", "Rua Logo Ali", "34348227802", "teste", "123456");
             biblio.setAdmin("teste", true);
-            biblio.cadastrarLivro("Um dia que foi noite", "Carinha da Esquina", "123456-12", 1);
-            biblio.cadastrarLivro("Um dia que foi noite 2", "Carinha da Esquina", "123456-13", 2);
-            biblio.cadastrarLivro("Um dia que foi noite 3", "Carinha da Esquina", "123456-14", 3);
+            biblio.cadastrarLivro("Um dia que foi noite", "Carinha da Esquina", "9788578270698", 1);
+            biblio.cadastrarLivro("Um dia que foi noite 2", "Carinha da Esquina", "9788578270698", 2);
+            biblio.cadastrarLivro("Um dia que foi noite 3", "Carinha da Esquina", "9788578270698", 3);
             //Loop Principal:
            
             while (!pararloop) {
@@ -555,17 +555,17 @@ import biblioteca.*;
                         } else {
                             System.out.println("\n\nConfira os dados acima!\nCaso esteja incorreto, digite 0 para tentar novamente!");
                             confirmacao = read.nextLine();
-                            try {
-                                if(!confirmacao.equals("0")){
+                            if(!confirmacao.equals("0")){
+                                try {
                                     biblio.cadastrarLivro(strread, strread2, strread3,  Integer.parseInt(strread4));
                                     concluido = true;
-                                }
-                                else{
+                                } catch (biblioteca.exceptions.ISBNInvalidoException isbnerror) {
                                     pularlinhas(100);
+                                    System.out.println("\n" + isbnerror.getMessage() + "\n Verifique e tente novamente!\n");
                                 }
-                            } catch (NumberFormatException nfe) {
+                                    
+                            }else{
                                 pularlinhas(100);
-                                System.out.println("\nSomente numeros são aceitos no campo edição, tente novamente!\n");
                             }
                         }
                     }   
@@ -629,7 +629,7 @@ import biblioteca.*;
                         strread = read.nextLine();
                         System.out.println("\nEndereço completo: (10+ caracteres)");
                         strread2 = read.nextLine();
-                        System.out.println("\nCPF: (11 caracteres)");
+                        System.out.println("\nCPF: (11 caracteres - Válido)");
                         strread3 = read.nextLine();
                         System.out.println("\nLogin: (6+ caracteres)");
                         strread4 = read.nextLine();
@@ -656,8 +656,16 @@ import biblioteca.*;
                             System.out.println("\n\nConfira os dados acima!\nCaso esteja incorreto, digite 0 para tentar novamente!");
                             confirmacao = read.nextLine();
                             if(!confirmacao.equals("0")){
+                                try{
                                 biblio.cadastrarUsuario(strread, strread2, strread3, strread4, strread5);
                                 concluido = true;
+                                }catch(biblioteca.exceptions.CPFInvalidoException cpfinvalido){
+                                    pularlinhas(100);
+                                    System.out.println("\n" + cpfinvalido.getMessage() + "\n Verifique e tente novamente!\n");
+                                }catch(biblioteca.exceptions.LoginRepetidoException loginrepetido){
+                                    pularlinhas(100);
+                                    System.out.println("\n" + loginrepetido.getMessage() + "\n Verifique e tente novamente!\n");
+                                }
                             }
                             else{
                                 pularlinhas(100);
